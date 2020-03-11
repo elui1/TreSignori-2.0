@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Limelight&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9c2c348e64.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
+
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
+
+    <link rel="stylesheet" href="../css/aos.css">
+
+    <link rel="stylesheet" href="../css/ionicons.min.css">
+
+    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="../css/flaticon.css">
+    <link rel="stylesheet" href="../css/icomoon.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<div th:replace="base :: navlinks"></div>
+
+
+<!--<nav>-->
+<!--    <a id="logo" href="#">Tre Signori</a>-->
+<!--    <a href="#">Contact Us</a>-->
+<!--    <p><i class="fas fa-search"></i><input type="search" placeholder="search"></p>-->
+
+<!--</nav>-->
+
+<main>
+    <div class="place-mat">
+        <div class="plate">
+            <div class="pizza">
+                <div class="sauce" style="visibility:hidden">
+                    <div class="cheese" style="visibility:hidden">
+                        <img id="ing1" src="#" alt="topping" style="visibility:hidden">
+                        <img id="ing2" src="#" alt="topping" style="visibility:hidden">
+                        <img id="ing3" src="#" alt="topping" style="visibility:hidden">
+                        <img id="ing4" src="#" alt="topping" style="visibility:hidden">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="receipt">
+        <p id="date">Date:</p>
+        <p>Summary of Purchase:</p>
+        <ul>
+            <li id="dough">Dough:</li>
+            <li id="sauce">Sauce:</li>
+            <li id="cheese">Cheese:</li>
+            <li id="toppingOne">Topping</li>
+            <li id="toppingTwo">Placeholder</li>
+            <li id="toppingThree">Placeholder</li>
+            <li id="toppingFour">Placeholder</li>
+        </ul>
+        <p id="price">Price:</p>
+        <p>Thank You, Buona Giornata</p>
+    </div>
+
+
+    <aside>
+
+        <h2>Buongiorno! How would you like your pizza?</h2>
+
+        <form action="#" id="pizzaForm">
+
+            <fieldset id="form1" action="#">
+                <legend>Dough</legend>
+                <ul>
+                    <li><input id="cau" type="radio" name="dough" value="cauliflower">Cauliflower</li>
+                    <li><input id="who" type="radio" name="dough" value="whole wheat">Whole Wheat</li>
+                    <li><input id="tra" type="radio" name="dough" value="traditional">Traditional</li>
+                </ul>
+            </fieldset>
+
+            <fieldset id="form2">
+                <legend>Sauce</legend>
+                <ul>
+                    <li><input id="cur" type="radio" name="sauce" value="curry">Curry</li>
+                    <li><input id="cre" type="radio" name="sauce" value="cream">Cream</li>
+                    <li><input id="mar" type="radio" name="sauce" value="marinara">Marinara</li>
+                </ul>
+            </fieldset>
+
+            <fieldset id="form3" action="#">
+                <legend>Cheese</legend>
+                <ul>
+                    <li><input id="moz" type="radio" name="cheese" value="cheese">Mozzarella</li>
+                    <li><input id="ame" type="radio" name="cheese" value="cheese">American</li>
+                    <li><input id="pro" type="radio" name="cheese" value="cheese">Provolone</li>
+                </ul>
+            </fieldset>
+
+            <fieldset id="form4">
+                <legend>Toppings</legend>
+                <ul>
+                    <li><input id="spi" name="toppings" value="spinach" type="checkbox">Spinach</li>
+                    <li><input id="tom" name="toppings" value="tomatoes" type="checkbox">Tomatoes</li>
+                    <li><input id="bac" name="toppings" value="bacon" type="checkbox">Bacon</li>
+                    <li><input id="mus" name="toppings" value="mushrooms" type="checkbox">Mushrooms</li>
+                </ul>
+            </fieldset>
+            <legend id="price-display">Price: $5.00</legend>
+            <i class="fas fa-shopping-cart"></i>
+            <input type="submit" value="Checkout">
+            <a href="/addPizza"> <button id="reset">Reset</button></a>
+        </form>
+        <!-- inside or outside?   -->
+
+    </aside>
+</main>
+<footer>
+    <p>&copy;2020 Tre Signori</p>
+    <p>Salute!</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="js/ourjs.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</body>
+</html>

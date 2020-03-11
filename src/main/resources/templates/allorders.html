@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Order List</h1>
+<table>
+    <tr>
+        <th>Title&nbsp;&nbsp;&nbsp;</th>
+        <th>Content&nbsp;&nbsp;&nbsp;</th>
+        <th>Posted By&nbsp;&nbsp;&nbsp;</th>
+        <td>Actions</td>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.dough}"></td>
+        <td th:text="${order.sauce}"></td>
+        <td th:text="${order.user.username}"></td>
+        <span>
+            <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>
+            <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>
+            <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>
+        </span>
+    </tr>
+</table>
+</body>
+</html>

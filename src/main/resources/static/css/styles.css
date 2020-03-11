@@ -1,0 +1,157 @@
+body{
+  background-color:white;
+  background-image:
+          linear-gradient(90deg, rgba(255,0,0,.5) 50%, transparent 50%),
+          linear-gradient(rgba(255,0,0,.5) 50%, transparent 50%);
+  background-size:50px 50px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  font-size: 30px;
+}
+
+nav a {
+  color: black;
+}
+
+#logo {
+  font-family: 'Limelight', cursive;
+  font-size: 45px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr 1fr 3fr;
+}
+
+aside {
+  padding: 20px;
+  height: 100vh;
+  background-color: white;
+  font-family: 'Quicksand', sans-serif;
+  background-color: rgba(252, 236, 212, 1);
+}
+
+#receipt {
+  background-color: bisque;
+  width: 40%;
+  height: 50%;
+  visibility: hidden;
+}
+
+#price-display {
+  float: right;
+}
+
+li {
+  list-style: none;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 900;
+}
+
+a:nth-of-type(2) + p, a:nth-of-type(2) {
+  font-family: Quicksand, sans-serif;
+}
+
+input {
+  margin: 5px;
+}
+
+.place-mat {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 400px;
+
+}
+
+.plate {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 330px;
+  width: 330px;
+  background-color: white;
+  border-radius: 180px;
+  border: 1px solid black;
+}
+
+.pizza {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 300px;
+  background-color: wheat;
+  border-radius: 180px;
+}
+
+.sauce {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 270px;
+  width: 270px;
+  background-color: red;
+  border-radius: 180px;
+}
+
+.cheese {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 240px;
+  width: 240px;
+  background-color: lightyellow;
+  border-radius: 180px;
+}
+
+#ing1 {
+  position: absolute;
+  height: 210px;
+  width: 210px;
+  border-radius:180px;
+  z-index: 1;
+}
+
+#ing2 {
+  position: absolute;
+  height: 210px;
+  width: 210px;
+  border-radius: 180px;
+  z-index: 2;
+}
+
+#ing3 {
+  position: absolute;
+  height: 210px;
+  width: 210px;
+  border-radius: 180px;
+  z-index: 3;
+}
+
+#ing4 {
+  position: absolute;
+  height: 210px;
+  width: 210px;
+  border-radius: 180px;
+  z-index: 4;
+}
+
+footer {
+  background-color: brown;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-family: 'Kaushan Script', cursive;
+  color: white;
+}
+
