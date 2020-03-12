@@ -33,58 +33,7 @@
 <body>
 <div th:replace="base :: navlinks"></div>
 <h1>My Orders</h1>
-<!--<table>-->
-<!--    <tr>-->
-<!--        <th>User&nbsp;&nbsp;&nbsp;</th>-->
-<!--        <th>Date&nbsp;&nbsp;&nbsp;</th>-->
-<!--        <th>Price&nbsp;&nbsp;&nbsp;</th>-->
-<!--        <th>Toppings&nbsp;&nbsp;&nbsp;</th>-->
-<!--        <td>Actions</td>-->
-<!--    </tr>-->
-<!--    <tr th:each="order : ${orders}">-->
-<!--        <td th:text="${order.user.username}"></td>-->
-<!--        <td th:text="${#temporals.format(order.dateTime,'dd-MMM-yyyy hh-mm')}"></td>-->
-<!--        <td th:text="${order.price}"></td>-->
-<!--        <td th:text="${order.toppings}"></td>-->
 
-<!--            <td>-->
-<!--                <span>-->
-<!--                    <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>-->
-<!--                    <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>-->
-<!--                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>-->
-<!--                </span>-->
-<!--            </td>-->
-<!--        </div>-->
-<!--    </tr>-->
-<!--</table>-->
-
-<!--<div class="container-fluid">-->
-<!--    <table class="table table-bordered table-striped">-->
-<!--        <div class="container-fluid py-3">-->
-<!--            <tr class="row thread-light">-->
-<!--                <th class="col-sm-1">Username</th>-->
-<!--                <th class="col-sm-2">Date</th>-->
-<!--                <th class="col-sm-2">Price</th>-->
-<!--                <th class="col-sm-2">Toppings</th>-->
-<!--                <th class="col-sm-2">Admin Panel</th>-->
-
-<!--            </tr>-->
-
-<!--            <tr th:each="order: ${orders}" class="row">-->
-<!--                &lt;!&ndash; <tr class="row">&ndash;&gt;-->
-
-<!--                <td th:text="${order.user.username}"></td>-->
-<!--                <td th:text="${#temporals.format(order.dateTime,'MMM/dd/yyyy hh:mm')}"></td>-->
-<!--                <td th:text="${order.price}"></td>-->
-<!--                <td th:text="${order.toppings}"></td>-->
-<!--&lt;!&ndash;                <td class="col-sm-2" th:text="${order.user.lastName}"></td>&ndash;&gt;-->
-<!--                <td class="col-sm-2">-->
-
-<!--                </td>-->
-<!--                &lt;!&ndash;</tr>&ndash;&gt;-->
-<!--        </div>-->
-<!--    </table>-->
-<!--</div>-->
 
 <div class="container">
     <div class="row">
