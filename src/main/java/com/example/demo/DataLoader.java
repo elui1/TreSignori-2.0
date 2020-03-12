@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,9 @@ public class DataLoader implements CommandLineRunner {
 
     @Autowired
     RoleRepository roleRepository;
+
+//    @Autowired
+//    XOrderRepository xOrderRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -33,53 +37,17 @@ public class DataLoader implements CommandLineRunner {
         user.setRoles(Arrays.asList(userRole));
         userRepository.save(user);
 
+        User user1 = new User("jimm@jimm.com", "k", "Jimm", "Jimmmerson",
+                "k", "222");
+        user1.setRoles(Arrays.asList(userRole));
+        userRepository.save(user1);
+
+
         User user2 = new User("admin@admin.com", "password", "Admin", "User",
                 "admin", "222");
         user2.setRoles(Arrays.asList(adminRole));
         userRepository.save(user2);
 
     }
-//
-//        User user3 = new User("test@test.com", "test", "Testy", "Tester", true, "test");
-//        user3.setRoles(Arrays.asList(userRole));
-//        userRepository.save(user3);
-//
-//        Message message = new Message("My favorite puppy", "so cute!");
-//        message.setUser(user2);
-//        messageRepository.save(message);
-//
-//        Set<Message> messages = new HashSet<>();
-//        messages.add(message);
-//        user2.setMessages(messages);
-//        userRepository.save(user2);
-//
-//
-//
-//
-//        message = new Message("My favorite food", "so good!");
-//        message.setUser(user3);
-//        messageRepository.save(message);
-//
-//        messages = new HashSet<>();
-//        messages.add(message);
-//        user3.setMessages(messages);
-//        userRepository.save(user3);
-//
-////        message = new Message("My favorite color", "so cool!", "Boss");
-////        message.setUser(user);
-////        messageRepository.save(message);
-//
-////        Message message = new Message("asdfsdf", "dfgdfgd");
-////        message.setUser(user1);
-////        messageRepository.save(message);
-////
-////        message = new Message("rtyfghj", "vbnbffg");
-////        message.setUser(user2);
-////        messageRepository.save(message);
-////
-////        message = new Message("bcvfger", "erterggde");
-////        message.setPostedBy("Tom");
-////        messageRepository.save(message);
-//    }
-//}
-    }
+
+}

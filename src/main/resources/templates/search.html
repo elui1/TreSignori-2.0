@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<div>
+<!--    <a href="/"><button>Index</button></a>-->
+    <th:block>
+        <div th:each = "order : ${orders}">
+            <p th:text="${order.user.username}"></p>
+<!--            <p th:inline="text">The person's height is [[${person.height}]]</p>-->
+<!--            <p th:inline="text">The person's age is [[${person.age}]]</p>        </div>-->
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

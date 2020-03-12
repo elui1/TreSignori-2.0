@@ -22,9 +22,12 @@ public class XOrder {
 
     private final double basePrice = 5.00;
 
-    public XOrder(String toppings) {
-        this.toppings = toppings;
-    }
+//    public XOrder(String toppings, User user) {
+//        dateTime= LocalDateTime.now();
+//        this.toppings = toppings;
+//        this.user = user;
+//        this.price = 10.99;
+//    }
 
     public XOrder() {
        dateTime= LocalDateTime.now();
@@ -80,6 +83,5 @@ public class XOrder {
 
     public double calculatePrice(String toppings) {
         return basePrice + (cleanToppings(toppings).split(",").length - 5) * 0.50;
-//        return Double.parseDouble(toppings.substring(toppings.length() - 4));
     }
 }

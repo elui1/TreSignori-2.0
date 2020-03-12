@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @Controller
 public class HomeController {
@@ -24,6 +25,9 @@ public class HomeController {
 
     @Autowired
     XOrderRepository xOrderRepository;
+
+//    @Autowired
+//    RoleRepository roleRepository;
 
     @GetMapping("/register")
     public String showRegistrationPage(Model model) {
@@ -108,7 +112,32 @@ public class HomeController {
     @RequestMapping("/myorders")
     public String myOrders(Model model) {
         User user = userService.getUser();
+//        roleRepository.save(new Role("USER"));
+//        roleRepository.save(new Role("ADMIN"));
+//        Role adminRole = roleRepository.findByRole("ADMIN");
+//        Role userRole = roleRepository.findByRole("USER");
+//
+//        User user1 = new User("jim@jim.com", "j", "Jim", "Jimmerson",
+//                "j", "111");
+//        user1.setRoles(Arrays.asList(userRole));
+//        userRepository.save(user1);
+//
+//        XOrder order = new XOrder("cauliflower, curry, american, spinach, tomatoes, bacon, mushrooms", user1);
+//        XOrder order1 = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1);
+//
+//
+//        xOrderRepository.save(order);
+//        xOrderRepository.save(order1);
+//
+//
+//
+//        User user2 = new User("admin@admin.com", "password", "Admin", "User",
+//                "admin", "222");
+//        user2.setRoles(Arrays.asList(adminRole));
+//        userRepository.save(user2);
+
         ArrayList<XOrder> orders = (ArrayList<XOrder>) xOrderRepository.findByUser(user);
+//        ArrayList<XOrder> orders = (ArrayList<XOrder>) xOrderRepository.findAll();
         model.addAttribute("orders", orders);
 
         return "myorders";
@@ -122,6 +151,17 @@ public class HomeController {
 
         model.addAttribute("orders", xOrderRepository.findAll());
         return "admin";
+    }
+
+    @RequestMapping("/search")
+    public String search(@RequestParam("search") String search, Model model){
+        model.addAttribute("users", userRepository.findByUsername(search));
+
+        User user = userService.getUser();
+        ArrayList<XOrder> orders = (ArrayList<XOrder>) xOrderRepository.findByUser(user);
+        model.addAttribute("orders", orders);
+
+        return "search";
     }
 
     @RequestMapping("/detail/{id}")
@@ -148,4 +188,6 @@ public class HomeController {
             return "redirect:/myorders";
         }
     }
+
+
 }

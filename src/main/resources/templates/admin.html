@@ -31,31 +31,53 @@
 </head>
 <body>
 <div th:replace="base :: navlinks"></div>
+<div style="display: flex; justify-content: flex-end">
+    <form th:action="@{/search}" method="post">
+        <input type="text" name="search" placeholder="Enter the search name" required>
+        <input type="submit" value="Search">
+    </form>
+</div>
 
 <h1>All Orders</h1>
-<table>
-    <tr>
-        <th>User&nbsp;&nbsp;&nbsp;</th>
-        <th>Price&nbsp;&nbsp;&nbsp;</th>
-        <td>Actions</td>
-    </tr>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-image">
+                <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Pizza</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Toppings</th>
+                    <th scope="col">Actions</th>
+                    <!--                    <th scope="col">Shares</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order: ${orders}">
 
-    <tr th:each="order : ${orders}">
-<!--        <div th:if="${order.user.username} != null">-->
-        <td th:text="${order.user.username}"></td>
-        <td th:text="${order.toppings}"></td>
-        <td th:text="${order.price}"></td>
-
-        <td>
-                <span>
-                    <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>
-                    <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>
-                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>
-                </span>
-        </td>
+                    <th scope="row" th:text="${order.user.username}"></th>
+                    <td th:text="${#temporals.format(order.dateTime,'MMM/dd/yyyy hh:mm')}"></td>
+                    <td class="w-10">
+                        <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/spinach.png"
+                             class="img-fluid img-thumbnail" alt="Spinach">
+                    </td>
+                    <td th:text="${order.price}"></td>
+                    <td class="w-25" th:text="${order.toppings}"></td>
+                    <td>
+                        <span>
+<!--                            <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>-->
+                            <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>
+                            <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-    </tr>
-</table>
+    </div>
+</div>
 
 <div th:replace="base :: footer "></div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

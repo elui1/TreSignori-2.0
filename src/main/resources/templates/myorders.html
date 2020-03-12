@@ -80,10 +80,6 @@
 <!--&lt;!&ndash;                <td class="col-sm-2" th:text="${order.user.lastName}"></td>&ndash;&gt;-->
 <!--                <td class="col-sm-2">-->
 
-<!--                    <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>-->
-<!--                    <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>-->
-<!--                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>-->
-
 <!--                </td>-->
 <!--                &lt;!&ndash;</tr>&ndash;&gt;-->
 <!--        </div>-->
@@ -98,35 +94,31 @@
                 <tr>
                     <th scope="col">Username</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Pizza</th>
                     <th scope="col">Price</th>
                     <th scope="col">Toppings</th>
-                    <th scope="col">Admin Panel</th>
+                    <th scope="col">Actions</th>
 <!--                    <th scope="col">Shares</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="order: ${orders}">
 
-                    <th scope="row">1</th>
-                    <td class="w-25">
-                        <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/spinach.png"
-                             class="img-fluid img-thumbnail" alt="Sheep">
+                    <th scope="row" th:text="${order.user.username}"></th>
+                        <td th:text="${#temporals.format(order.dateTime,'MMM/dd/yyyy hh:mm')}"></td>
+                        <td class="w-10">
+                            <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/spinach.png"
+                                 class="img-fluid img-thumbnail" alt="Spinach">
+                        </td>
+                        <td th:text="${order.price}"></td>
+                        <td class="w-25" th:text="${order.toppings}"></td>
+                    <td>
+                        <span>
+<!--                            <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>-->
+                            <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>
+                            <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>
+                        </span>
                     </td>
-                    <td th:text="${order.user.username}"></td>
-                    <td>Bootstrap 4 CDN and Starter Template</td>
-                    <td>Cristina</td>
-                    <td>913</td>
-                    <td>2.846</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td class="w-25">
-                        <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep">
-                    </td>
-                    <td>Bootstrap Grid 4 Tutorial and Examples</td>
-                    <td>Cristina</td>
-                    <td>1.434</td>
-                    <td>3.417</td>
                 </tr>
                 </tbody>
             </table>
