@@ -60,13 +60,17 @@ public class HomeController {
     }
 
     @PostMapping("/addPizza")
-    public @ResponseBody String addPizza(HttpServletRequest request, HttpServletResponse response) {
+    public @ResponseBody String addPizza(HttpServletRequest request, HttpServletResponse response,
+                                            Authentication auth) {
         XOrder pizza = new XOrder();
 //        pizza.setPrice(0);
-        pizza.setToppings(request.getParameter("toppings"));
+        pizza.setToppings(pizza.cleanToppings(request.getParameter("toppings")));
         pizza.setUser(userService.getUser());
         pizza.setPrice(pizza.calculatePrice(request.getParameter("toppings")));
-        xOrderRepository.save(pizza);
+
+        if (auth.getAuthorities().toString().equals("[USER]")) {
+            xOrderRepository.save(pizza);
+        }
         return "redirect:/";
 
     }

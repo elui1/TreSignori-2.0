@@ -70,15 +70,16 @@ public class XOrder {
         this.price = price;
     }
 
-    public int numberOfToppings(String toppings) {
+    public String cleanToppings(String toppings) {
         if (toppings.contains("null") == true) {
-            return toppings.split(",").length - 6;
+            return toppings.substring(toppings.indexOf(",") + 1);
         }
-        return toppings.split(",").length - 5;
+
+        return toppings;
     }
 
     public double calculatePrice(String toppings) {
-        return basePrice + (numberOfToppings(toppings)) * 0.50;
+        return basePrice + (cleanToppings(toppings).split(",").length - 5) * 0.50;
 //        return Double.parseDouble(toppings.substring(toppings.length() - 4));
     }
 }

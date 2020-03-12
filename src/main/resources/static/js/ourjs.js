@@ -25,10 +25,9 @@ menuForm.addEventListener("change", (e)=> {
     e.preventDefault();
     if(cau.checked == true) {
         console.log("cauliflower");
-        if(toppings!=null)
+
             toppings= toppings + " ,cauliflower";
-        else
-            toppings=toppings;
+
         PIZZA.style.backgroundColor = "cornsilk";
     } else if (who.checked == true) {
         console.log("whole wheat");
