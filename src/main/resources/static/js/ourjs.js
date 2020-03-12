@@ -26,7 +26,7 @@ menuForm.addEventListener("change", (e)=> {
     if(cau.checked == true) {
         console.log("cauliflower");
         if(toppings!=null)
-            toppings= toppings +", cauliflower";
+            toppings= toppings + " ,cauliflower";
         else
             toppings=toppings;
         PIZZA.style.backgroundColor = "cornsilk";
