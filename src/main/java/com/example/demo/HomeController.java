@@ -26,9 +26,6 @@ public class HomeController {
     @Autowired
     XOrderRepository xOrderRepository;
 
-    @Autowired
-    RoleRepository roleRepository;
-
     @GetMapping("/register")
     public String showRegistrationPage(Model model) {
         model.addAttribute("user", new User());
@@ -77,10 +74,6 @@ public class HomeController {
 
         }
         return null;
-//        else {
-//            System.out.println("i am not logged in");
-//            return "redirect:/register";
-//        }
 
     }
 
@@ -116,49 +109,47 @@ public class HomeController {
         ArrayList<XOrder> orders = (ArrayList<XOrder>) xOrderRepository.findByUser(user);
         model.addAttribute("orders", orders);
 
-
         return "myorders";
     }
 
     @RequestMapping("/admin")
     public String allOrders(Model model) {
-        //        User user = userService.getUser();
-        roleRepository.save(new Role("USER"));
-        roleRepository.save(new Role("ADMIN"));
-        Role adminRole = roleRepository.findByRole("ADMIN");
-        Role userRole = roleRepository.findByRole("USER");
 
-        User user1 = new User("jim@jim.com", "j", "Jim", "Jimmerson",
-                "j", "111");
-        user1.setRoles(Arrays.asList(userRole));
-        userRepository.save(user1);
-
-        User user2 = new User("jimm@jim.com", "k", "Jimm", "Jimmmerson",
-                "k", "222");
-        user1.setRoles(Arrays.asList(userRole));
-        userRepository.save(user2);
-
-        XOrder order = new XOrder("cauliflower, curry, american, spinach, tomatoes, bacon, mushrooms", user1);
-        XOrder order1 = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1);
-        XOrder order2 = new XOrder("traditional, curry, provolone, tomatoes, bacon, mushrooms", user2);
-
-        xOrderRepository.save(order);
-        xOrderRepository.save(order1);
-        xOrderRepository.save(order2);
-
-        User user3 = new User("admin@admin.com", "password", "Admin", "User",
-                "admin", "222");
-        user3.setRoles(Arrays.asList(adminRole));
-        userRepository.save(user3);
-
-//        ArrayList<XOrder> orders = (ArrayList<XOrder>) xOrderRepository.findByUser(user);
-        ArrayList<XOrder> orders = (ArrayList<XOrder>) xOrderRepository.findAll();
-        model.addAttribute("orders", orders);
-//        if (userService.getUser() != null) {
-//            model.addAttribute("user_id", userService.getUser().getId());
-//        }
+//        roleRepository.save(new Role("USER"));
+//        roleRepository.save(new Role("ADMIN"));
+//        Role adminRole = roleRepository.findByRole("ADMIN");
+//        Role userRole = roleRepository.findByRole("USER");
 //
-//        model.addAttribute("orders", xOrderRepository.findAll());
+//        User user1 = new User("jim@jim.com", "j", "Jim", "Jimmerson",
+//                "j", "111");
+//        user1.setRoles(Arrays.asList(userRole));
+//        userRepository.save(user1);
+//
+//        User user2 = new User("jimm@jim.com", "k", "Jimm", "Jimmmerson",
+//                "k", "222");
+//        user1.setRoles(Arrays.asList(userRole));
+//        userRepository.save(user2);
+//
+//        XOrder order = new XOrder("cauliflower, curry, american, spinach, tomatoes, bacon, mushrooms", user1);
+//        XOrder order1 = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1);
+//        XOrder order2 = new XOrder("traditional, curry, provolone, tomatoes, bacon, mushrooms", user2);
+//
+//        xOrderRepository.save(order);
+//        xOrderRepository.save(order1);
+//        xOrderRepository.save(order2);
+//
+//        User user3 = new User("admin@admin.com", "password", "Admin", "User",
+//                "admin", "222");
+//        user3.setRoles(Arrays.asList(adminRole));
+//        userRepository.save(user3);
+
+//        ArrayList<XOrder> orders = (ArrayList<XOrder>) xOrderRepository.findAll();
+
+        if (userService.getUser() != null) {
+            model.addAttribute("user_id", userService.getUser().getId());
+        }
+
+        model.addAttribute("orders", xOrderRepository.findAll());
         return "admin";
     }
 
