@@ -1,33 +1,150 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>My Orders</h1>
-<table>
-    <tr>
-        <th>Title&nbsp;&nbsp;&nbsp;</th>
-        <th>Content&nbsp;&nbsp;&nbsp;</th>
-        <th>Posted By&nbsp;&nbsp;&nbsp;</th>
-        <td>Actions</td>
-    </tr>
-    <tr th:each="order : ${orders}">
-        <td th:text="${order.toppings}"></td>
-        <td th:text="${order.price}"></td>
-        <td th:text="${order.user.username}"></td>
+    <title>Tre Signori</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-            <td>
-                <span>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
+
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
+
+    <link rel="stylesheet" href="../css/aos.css">
+
+    <link rel="stylesheet" href="../css/ionicons.min.css">
+
+    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="../css/flaticon.css">
+    <link rel="stylesheet" href="../css/icomoon.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+<div th:replace="base :: navlinks"></div>
+<h1>My Orders</h1>
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>User&nbsp;&nbsp;&nbsp;</th>-->
+<!--        <th>Date&nbsp;&nbsp;&nbsp;</th>-->
+<!--        <th>Price&nbsp;&nbsp;&nbsp;</th>-->
+<!--        <th>Toppings&nbsp;&nbsp;&nbsp;</th>-->
+<!--        <td>Actions</td>-->
+<!--    </tr>-->
+<!--    <tr th:each="order : ${orders}">-->
+<!--        <td th:text="${order.user.username}"></td>-->
+<!--        <td th:text="${#temporals.format(order.dateTime,'dd-MMM-yyyy hh-mm')}"></td>-->
+<!--        <td th:text="${order.price}"></td>-->
+<!--        <td th:text="${order.toppings}"></td>-->
+
+<!--            <td>-->
+<!--                <span>-->
 <!--                    <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>-->
 <!--                    <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>-->
 <!--                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>-->
-                </span>
-            </td>
-        </div>
-    </tr>
-</table>
+<!--                </span>-->
+<!--            </td>-->
+<!--        </div>-->
+<!--    </tr>-->
+<!--</table>-->
 
+<!--<div class="container-fluid">-->
+<!--    <table class="table table-bordered table-striped">-->
+<!--        <div class="container-fluid py-3">-->
+<!--            <tr class="row thread-light">-->
+<!--                <th class="col-sm-1">Username</th>-->
+<!--                <th class="col-sm-2">Date</th>-->
+<!--                <th class="col-sm-2">Price</th>-->
+<!--                <th class="col-sm-2">Toppings</th>-->
+<!--                <th class="col-sm-2">Admin Panel</th>-->
+
+<!--            </tr>-->
+
+<!--            <tr th:each="order: ${orders}" class="row">-->
+<!--                &lt;!&ndash; <tr class="row">&ndash;&gt;-->
+
+<!--                <td th:text="${order.user.username}"></td>-->
+<!--                <td th:text="${#temporals.format(order.dateTime,'MMM/dd/yyyy hh:mm')}"></td>-->
+<!--                <td th:text="${order.price}"></td>-->
+<!--                <td th:text="${order.toppings}"></td>-->
+<!--&lt;!&ndash;                <td class="col-sm-2" th:text="${order.user.lastName}"></td>&ndash;&gt;-->
+<!--                <td class="col-sm-2">-->
+
+<!--                    <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>-->
+<!--                    <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>-->
+<!--                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>-->
+
+<!--                </td>-->
+<!--                &lt;!&ndash;</tr>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </table>-->
+<!--</div>-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-image">
+                <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Toppings</th>
+                    <th scope="col">Admin Panel</th>
+<!--                    <th scope="col">Shares</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order: ${orders}">
+
+                    <th scope="row">1</th>
+                    <td class="w-25">
+                        <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/spinach.png"
+                             class="img-fluid img-thumbnail" alt="Sheep">
+                    </td>
+                    <td th:text="${order.user.username}"></td>
+                    <td>Bootstrap 4 CDN and Starter Template</td>
+                    <td>Cristina</td>
+                    <td>913</td>
+                    <td>2.846</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td class="w-25">
+                        <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                    </td>
+                    <td>Bootstrap Grid 4 Tutorial and Examples</td>
+                    <td>Cristina</td>
+                    <td>1.434</td>
+                    <td>3.417</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div th:replace="base :: footer "></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 </html>

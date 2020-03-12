@@ -62,14 +62,8 @@
 </div>
 </div>
 
-<table th:each="order: ${orders}">
-    <tr>
-        <td th:text="${#temporals.format(order.dateTime,'dd-MMM-yyyy hh-mm')}"></td>
-        <td th:inline="text">[[${order.price}]]</td>
-    </tr>
-</table>
 
-<!--<div th:replace="base :: footer "></div>-->
+<div th:replace="base :: footer "></div>
 
 
 <!-- loader -->

@@ -306,11 +306,14 @@ function sub() {
         type: "POST",
         url: "/addPizza",
         data: {
-            name: "Matt",
             toppings: toppings,
         },
         success: function (result) {
             console.log(result);
+            // window.location.href = "/";
+        },
+        error: function(result) {
+            window.location.href = "/register";
         }
     });
 }

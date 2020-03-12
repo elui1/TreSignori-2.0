@@ -70,8 +70,13 @@ public class HomeController {
 
         if (auth.getAuthorities().toString().equals("[USER]")) {
             xOrderRepository.save(pizza);
+
         }
-        return "redirect:/";
+        return null;
+//        else {
+//            System.out.println("i am not logged in");
+//            return "redirect:/register";
+//        }
 
     }
 

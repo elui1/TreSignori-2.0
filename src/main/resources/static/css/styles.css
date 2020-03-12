@@ -154,4 +154,24 @@ footer {
   font-family: 'Kaushan Script', cursive;
   color: white;
 }
+/*.container {*/
+/*  padding: 2rem 0rem;*/
+/*}*/
+
+h4 {
+  margin: 2rem 0rem 1rem;
+}
+
+.table-image
+td, th {
+  vertical-align: middle;
+}
+
+.mb-4 {
+  color: white;
+}
+
+.boss {
+  color: black;
+}
 
