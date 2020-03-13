@@ -313,7 +313,7 @@ function sub() {
             // window.location.href = "/";
         },
         error: function(result) {
-            window.location.href = "/register";
+            window.location.href = "/login";
         }
     });
 }
