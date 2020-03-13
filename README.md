@@ -1,6 +1,6 @@
 # FinalProject
 
-Eric, Bili, and Matt worked together for a little over a week on a Pizza App. This app allows the user to navigate from the home page to 
+Eric, Bili, and Matt worked together for a week on a Pizza App. This app allows the user to navigate from the home page to 
 an ordering page and select what pizza they want from a list of options, if they have registered and logged in. Once they have gotten through the paper work and ordered, they are able to have their history recorded and retrieved at will. This system also enables the business owner to look at everyone's history and calculate things such as gross sales and the most common toppings ordered. 
 
 Functionality:
