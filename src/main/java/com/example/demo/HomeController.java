@@ -110,6 +110,7 @@ public class HomeController {
         }
 
         model.addAttribute("orders", xOrderRepository.findAll());
+        //TODO: added for top 3 toppings and total sales
         Map<String, Integer> toppingsByCounts = captureCountOfToppings(xOrderRepository.findAll());
         Map<String, Integer> sortedToppings = sortToppingsByCounts(toppingsByCounts);
         model.addAttribute("topThreeToppings", filterTopThreeToppings(sortedToppings));
@@ -120,7 +121,7 @@ public class HomeController {
     public Map<String, Integer> captureCountOfToppings(ArrayList<XOrder> orders) {
         int countOfSpinach = 0;
         int countOfTomatoes = 0;
-        int countOfBeacon = 0;
+        int countOfBacon = 0;
         int countOfMushrooms = 0;
         for (XOrder o : orders) {
             for (String topping : o.getToppings().split(",")) {
@@ -128,8 +129,8 @@ public class HomeController {
                     countOfSpinach += 1;
                 } else if (topping.equalsIgnoreCase("tomatoes")) {
                     countOfTomatoes += 1;
-                } else if (topping.equalsIgnoreCase("becon")) {
-                    countOfBeacon += 1;
+                } else if (topping.equalsIgnoreCase("bacon")) {
+                    countOfBacon += 1;
                 } else if (topping.equalsIgnoreCase("mushrooms")) {
                     countOfMushrooms += 1;
                 } else
@@ -139,7 +140,7 @@ public class HomeController {
         Map<String, Integer> toppingsAndCounts = new HashMap<>();
         toppingsAndCounts.put("Spinach", countOfSpinach);
         toppingsAndCounts.put("Tomatoes", countOfTomatoes);
-        toppingsAndCounts.put("Becon", countOfBeacon);
+        toppingsAndCounts.put("Bacon", countOfBacon);
         toppingsAndCounts.put("Mushrooms", countOfMushrooms);
         return toppingsAndCounts;
     }
@@ -154,15 +155,15 @@ public class HomeController {
         return sortedMap;
     }
     //TODO: Find only the top three toppings using counts
-    public String filterTopThreeToppings(Map<String, Integer> unSortedMap) {
+    public String filterTopThreeToppings(Map<String, Integer> sortedMap) {
         int maxCount = 0;
         String finalTopToppings = null;
-        for (Map.Entry<String, Integer> e : unSortedMap.entrySet()) {
+        for (Map.Entry<String, Integer> e : sortedMap.entrySet()) {
             if (maxCount != 3) {
                 if (finalTopToppings == null) {
-                    finalTopToppings = e.getKey() + " ";
+                    finalTopToppings = e.getKey() + " : " + e.getValue();
                 } else {
-                    finalTopToppings = finalTopToppings +" "+ e.getKey();
+                    finalTopToppings = finalTopToppings +" , "+ e.getKey() + ": " + e.getValue();
                 }
                 maxCount = maxCount + 1;
             } else
@@ -180,7 +181,7 @@ public class HomeController {
         }
         NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
         System.out.println("US: " + defaultFormat.format(totalSales));
-        return "Total sales to date : " + defaultFormat.format(totalSales);
+        return "Total Sales : " + defaultFormat.format(totalSales);
 
     }
 
