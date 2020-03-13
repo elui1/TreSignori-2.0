@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 @Controller
 public class HomeController {
@@ -29,7 +28,7 @@ public class HomeController {
     @GetMapping("/register")
     public String showRegistrationPage(Model model) {
         model.addAttribute("user", new User());
-        return "registration";
+        return "register";
     }
 
     @PostMapping("/register")
@@ -38,7 +37,7 @@ public class HomeController {
         model.addAttribute("user", user);
         if (result.hasErrors())
         {
-            return "registration";
+            return "register";
         }
         else
         {
@@ -64,7 +63,6 @@ public class HomeController {
     public @ResponseBody String addPizza(HttpServletRequest request, HttpServletResponse response,
                                          Authentication auth) {
         XOrder pizza = new XOrder();
-//        pizza.setPrice(0);
         pizza.setToppings(pizza.cleanToppings(request.getParameter("toppings")));
         pizza.setUser(userService.getUser());
         pizza.setPrice(pizza.calculatePrice(request.getParameter("toppings")));
@@ -76,14 +74,6 @@ public class HomeController {
         return null;
 
     }
-
-//    @PostMapping("/process")
-//    public String processForm(@ModelAttribute XOrder order, Model model) {
-//
-//        order.setUser(userService.getUser());
-//        xOrderRepository.save(order);
-//        return "redirect:/";
-//    }
 
     @RequestMapping("/login")
     public String login() {
@@ -114,37 +104,6 @@ public class HomeController {
 
     @RequestMapping("/admin")
     public String allOrders(Model model) {
-
-//        roleRepository.save(new Role("USER"));
-//        roleRepository.save(new Role("ADMIN"));
-//        Role adminRole = roleRepository.findByRole("ADMIN");
-//        Role userRole = roleRepository.findByRole("USER");
-//
-//        User user1 = new User("jim@jim.com", "j", "Jim", "Jimmerson",
-//                "j", "111");
-//        user1.setRoles(Arrays.asList(userRole));
-//        userRepository.save(user1);
-//
-//        User user2 = new User("jimm@jim.com", "k", "Jimm", "Jimmmerson",
-//                "k", "222");
-//        user1.setRoles(Arrays.asList(userRole));
-//        userRepository.save(user2);
-//
-//        XOrder order = new XOrder("cauliflower, curry, american, spinach, tomatoes, bacon, mushrooms", user1);
-//        XOrder order1 = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1);
-//        XOrder order2 = new XOrder("traditional, curry, provolone, tomatoes, bacon, mushrooms", user2);
-//
-//        xOrderRepository.save(order);
-//        xOrderRepository.save(order1);
-//        xOrderRepository.save(order2);
-//
-//        User user3 = new User("admin@admin.com", "password", "Admin", "User",
-//                "admin", "222");
-//        user3.setRoles(Arrays.asList(adminRole));
-//        userRepository.save(user3);
-
-//        ArrayList<XOrder> orders = (ArrayList<XOrder>) xOrderRepository.findAll();
-
         if (userService.getUser() != null) {
             model.addAttribute("user_id", userService.getUser().getId());
         }
@@ -154,32 +113,25 @@ public class HomeController {
     }
 
     @RequestMapping("/search")
-    public String search(@RequestParam("search") String search, Model model){
-       /* if (userService.getUser() != null) {
-            model.addAttribute("user_id", userService.getUser().getId());
-        }*/
-
-
-        /*model.addAttribute("orders", xOrderRepository.findAll());*/
+    public String search(@RequestParam("search") String search, Model model) {
         model.addAttribute("orders", userRepository.findByUsername(search).getOrders());
-
         return "admin";
     }
 
-    @RequestMapping("/detail/{id}")
-    public String showMessage(@PathVariable("id") long id, Model model) {
-        model.addAttribute("order", xOrderRepository.findById(id).get());
-        return "show";
-    }
+//    @RequestMapping("/detail/{id}")
+//    public String showOrder(@PathVariable("id") long id, Model model) {
+//        model.addAttribute("order", xOrderRepository.findById(id).get());
+//        return "show";
+//    }
 
     @RequestMapping("/update/{id}")
-    public String updateMessage(@PathVariable("id") long id, Model model) {
+    public String updateOrder(@PathVariable("id") long id, Model model) {
         model.addAttribute("order", xOrderRepository.findById(id).get());
         return "orderform";
     }
 
     @RequestMapping("/delete/{id}")
-    public String delMessage(@PathVariable("id") long id, Authentication auth) {
+    public String delOrder(@PathVariable("id") long id, Authentication auth) {
         xOrderRepository.deleteById(id);
 
         if (auth.getAuthorities().toString().equals("[ADMIN]")) {

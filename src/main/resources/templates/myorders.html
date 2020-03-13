@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 
-<body>
+<body style="background-image:url('images/bg_4.jpg'); background-repeat: no-repeat;
+background-size: cover;">
 <div th:replace="base :: navlinks"></div>
-<h1>My Orders</h1>
 
 
+<!--<h1>My Orders</h1>-->
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -30,24 +31,35 @@
                     <th scope="col">Price</th>
                     <th scope="col">Toppings</th>
                     <th scope="col">Actions</th>
-<!--                    <th scope="col">Shares</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="order: ${orders}">
 
                     <th scope="row" th:text="${order.user.username}"></th>
-                        <td th:text="${#temporals.format(order.dateTime,'MMM/dd/yyyy hh:mm a')}"></td>
-                        <td class="w-10">
-                            <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/B.jpg"
-                                 class="img-fluid img-thumbnail" alt="Spinach">
-                        </td>
+                        <td th:text="${#temporals.format(order.dateTime,'MMM-dd-yyyy hh:mm a')}"></td>
+                            <td class="w-15">
+                                <div th:if="${order.toppings.contains('cauliflower')}">
+                                    <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/B.jpg"
+                                         class="img-fluid img-thumbnail" alt="Cauliflower">
+                                </div>
+                                <div th:if="${order.toppings.contains('whole wheat')}">
+                                    <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/P.jpg"
+                                         class="img-fluid img-thumbnail" alt="Whole wheat">
+                                </div>
+                                <div th:if="${order.toppings.contains('traditional')}">
+                                    <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/V.jpg"
+                                         class="img-fluid img-thumbnail" alt="Traditional">
+                                </div>
+                            </td>
+
                         <td th:text="${#numbers.formatCurrency(order.price)}"></td>
                         <td class="w-25" th:text="${order.toppings}"></td>
+
                     <td>
                         <span>
 <!--                            <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>-->
-                            <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>
+<!--                            <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>-->
                             <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>
                         </span>
                     </td>
@@ -59,6 +71,12 @@
 </div>
 
 <div th:replace="base :: footer "></div>
+
+<style>
+    .container {
+        color: white;
+    }
+</style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

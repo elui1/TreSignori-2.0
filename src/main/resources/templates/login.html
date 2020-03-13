@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body style="background-image:url('images/image_3.jpg'); background-repeat: no-repeat; background-size: cover;">
+<body style="background-image:url('images/bg_1.jpg'); background-repeat: no-repeat; background-size: cover;">
 <div th:replace="base :: navlinks"></div>
 
 <div class="log-container">
@@ -34,7 +34,12 @@
             <label>Password: </label>
             <input type="password" name="password" required />
         </div>
-        <div><input class="btn btn-primary" type="submit" value="Sign in"/></div>
+        <div>
+            <input class="btn btn-primary" type="submit" value="Sign in"/>
+        </div>
+        <div>
+            <a href="/register">Don’t have an account yet? Click here to register.</a>
+        </div>
     </form>
 </div>
 
@@ -70,6 +75,7 @@
     input[type="submit"] {
         align-self: center;
         text-align: center;
+        width: 400px;
     }
 
     .log-container {

@@ -15,7 +15,7 @@
 
 </head>
 
-<body style="background-image:url('images/image_3.jpg'); background-repeat: no-repeat;
+<body style="background-image:url('images/bg_1.jpg'); background-repeat: no-repeat;
 background-size: cover;">
 <div th:replace="base :: navlinks"></div>
 <div class="reg-container">
@@ -66,7 +66,8 @@ background-size: cover;">
               th:errors="*{password}">Password Error</span></strong></mark>
         <input type="text" id="password" placeholder="Password" required
                th:field="*{password}" /><br />
-        <button type="submit" class="btn btn-primary">Submit</button>
+<!--        <button type="submit" class="btn btn-primary">Submit</button>-->
+        <input class="btn btn-primary" type="submit" value="Submit"/>
     </form>
 </div>
 <div th:replace="base :: footer"></div>

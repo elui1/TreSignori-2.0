@@ -47,6 +47,14 @@ public class DataLoader implements CommandLineRunner {
         user2.setRoles(Arrays.asList(adminRole));
         userRepository.save(user2);
 
+//        XOrder order = new XOrder("cauliflower, curry, american, spinach, tomatoes, bacon, mushrooms", user1);
+//        XOrder order1 = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1);
+//        XOrder order2 = new XOrder("traditional, curry, provolone, tomatoes, bacon, mushrooms", user2);
+//
+//        xOrderRepository.save(order);
+//        xOrderRepository.save(order1);
+//        xOrderRepository.save(order2);
+
     }
 
 }

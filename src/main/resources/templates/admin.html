@@ -9,27 +9,12 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../css/animate.css">
-
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../css/magnific-popup.css">
-
-    <link rel="stylesheet" href="../css/aos.css">
-
-    <link rel="stylesheet" href="../css/ionicons.min.css">
-
-    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="../css/jquery.timepicker.css">
-
-
-    <link rel="stylesheet" href="../css/flaticon.css">
-    <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+
+<body style="background-image:url('images/bg_4.jpg'); background-repeat: no-repeat;
+background-size: cover;">
 <div th:replace="base :: navlinks"></div>
 <div style="display: flex; justify-content: flex-end">
     <form th:action="@{/search}" method="post">
@@ -38,7 +23,7 @@
     </form>
 </div>
 
-<h1>All Orders</h1>
+<!--<h1>All Orders</h1>-->
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -50,25 +35,38 @@
                     <th scope="col">Pizza</th>
                     <th scope="col">Price</th>
                     <th scope="col">Toppings</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Actions</th>
-                    <!--                    <th scope="col">Shares</th>-->
+
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="order: ${orders}">
 
                     <th scope="row" th:text="${order.user.username}"></th>
-                    <td th:text="${#temporals.format(order.dateTime,'MMM/dd/yyyy hh:mm')}"></td>
-                    <td class="w-10">
-                        <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/spinach.png"
-                             class="img-fluid img-thumbnail" alt="Spinach">
-                    </td>
-                    <td th:text="${order.price}"></td>
-                    <td class="w-25" th:text="${order.toppings}"></td>
+                        <td th:text="${#temporals.format(order.dateTime,'MMM-dd-yyyy hh:mm a')}"></td>
+                            <td class="w-15">
+                                <div th:if="${order.toppings.contains('cauliflower')}">
+                                    <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/B.jpg"
+                                         class="img-fluid img-thumbnail" alt="Cauliflower">
+                                </div>
+                                <div th:if="${order.toppings.contains('whole wheat')}">
+                                    <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/P.jpg"
+                                         class="img-fluid img-thumbnail" alt="Whole wheat">
+                                </div>
+                                <div th:if="${order.toppings.contains('traditional')}">
+                                    <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/V.jpg"
+                                         class="img-fluid img-thumbnail" alt="Traditional">
+                                </div>
+                            </td>
+
+                        <td th:text="${#numbers.formatCurrency(order.price)}"></td>
+                        <td class="w-25" th:text="${order.toppings}"></td>
+                        <td th:text="${order.user.email}"></td>
                     <td>
                         <span>
-<!--                            <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>-->
-                            <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>
+                            <a class="btn btn-primary" a href="#">Send Email</a>
+<!--                            <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>-->
                             <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>
                         </span>
                     </td>
@@ -80,6 +78,13 @@
 </div>
 
 <div th:replace="base :: footer "></div>
+
+<style>
+    .container {
+        color: white;
+    }
+</style>
+
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

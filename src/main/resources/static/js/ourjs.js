@@ -138,8 +138,8 @@ menuForm4.addEventListener("change", (e)=> {
 
 spi.addEventListener("change", (e) => {
     if (spi.checked == true) {
-        console.log("tomatoes");
-        toppings = toppings + " ,tomatoes";
+        console.log("spinach");
+        toppings = toppings + " ,spinach";
         top1.style.visibility = "visible";
         top1.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/spinach.png";
         // priceChanger();
@@ -151,8 +151,8 @@ spi.addEventListener("change", (e) => {
 
 tom.addEventListener("change", (e) => {
     if (tom.checked == true) {
-        console.log("mushrooms");
-        toppings = toppings + " ,mushrooms";
+        console.log("tomatoes");
+        toppings = toppings + " ,tomatoes";
         top2.style.visibility = "visible";
         top2.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/tomatoes.png";
         // priceChanger();
@@ -164,26 +164,26 @@ tom.addEventListener("change", (e) => {
 
 bac.addEventListener("change", (e) => {
     if (bac.checked == true) {
-        console.log("spinach");
-        toppings = toppings + " ,spinach";
+        console.log("bacon");
+        toppings = toppings + " ,bacon";
         top3.style.visibility = "visible";
         top3.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/bacon.png";
         // priceChanger();
     } else {
-        console.log("no spinach");
+        console.log("no bacon");
         top3.style.visibility = "hidden";
     }
 });
 
 mus.addEventListener("change", (e) => {
     if (mus.checked == true) {
-        console.log("bacon");
-        toppings = toppings + " ,bacon";
+        console.log("mushrooms");
+        toppings = toppings + " ,mushrooms";
         top4.style.visibility = "visible";
         top4.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/mushroom.png";
         // priceChanger();
     } else {
-        console.log("no bacon");
+        console.log("no mushrooms");
         top4.style.visibility = "hidden";
     }
 });
@@ -296,12 +296,12 @@ reset.addEventListener("click", (e)=> {
 
 // AJAX ADDED BELOW //
 
-function sub() {
 // let selected = `${cau.value}, ${who.value}, ${tra.value}, ${cur.value}, ${cre.value}, ${mar.value}, ${moz.value}, ${ame.value}, ${pro.value}`;
 // THIS WORKS FOR NUMBER let selected = document.querySelectorAll('input:checked').length;
 // let selected = document.querySelectorAll('input:checked').value;
 
 //Below: For non-Codepen
+function sub() {
     $.ajax({
         type: "POST",
         url: "/addPizza",
