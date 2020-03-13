@@ -222,7 +222,7 @@ pf.addEventListener("submit", (e)=> {
         selected.push("")
     } else if (selected.length == 5) {
         // add two nulls
-        selected.push("");
+        selected.push("","");
     } else if (selected.length == 4) {
         // add three nulls
         selected.push("", "", "")
