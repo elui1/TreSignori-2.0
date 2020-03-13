@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
+import java.text.NumberFormat;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -109,7 +110,78 @@ public class HomeController {
         }
 
         model.addAttribute("orders", xOrderRepository.findAll());
+        Map<String, Integer> toppingsByCounts = captureCountOfToppings(xOrderRepository.findAll());
+        Map<String, Integer> sortedToppings = sortToppingsByCounts(toppingsByCounts);
+        model.addAttribute("topThreeToppings", filterTopThreeToppings(sortedToppings));
+        model.addAttribute("totalSales", calculateTotalSales(xOrderRepository.findAll()));
         return "admin";
+    }
+    // TODO: capture counts for each toppings
+    public Map<String, Integer> captureCountOfToppings(ArrayList<XOrder> orders) {
+        int countOfSpinach = 0;
+        int countOfTomatoes = 0;
+        int countOfBeacon = 0;
+        int countOfMushrooms = 0;
+        for (XOrder o : orders) {
+            for (String topping : o.getToppings().split(",")) {
+                if (topping.equalsIgnoreCase("spinach")) {
+                    countOfSpinach += 1;
+                } else if (topping.equalsIgnoreCase("tomatoes")) {
+                    countOfTomatoes += 1;
+                } else if (topping.equalsIgnoreCase("becon")) {
+                    countOfBeacon += 1;
+                } else if (topping.equalsIgnoreCase("mushrooms")) {
+                    countOfMushrooms += 1;
+                } else
+                    continue;
+            }
+        }
+        Map<String, Integer> toppingsAndCounts = new HashMap<>();
+        toppingsAndCounts.put("Spinach", countOfSpinach);
+        toppingsAndCounts.put("Tomatoes", countOfTomatoes);
+        toppingsAndCounts.put("Becon", countOfBeacon);
+        toppingsAndCounts.put("Mushrooms", countOfMushrooms);
+        return toppingsAndCounts;
+    }
+    // TODO: Filter the top three toppings
+    public Map<String, Integer> sortToppingsByCounts(Map<String, Integer> unSortedMap) {
+
+        Map<String, Integer> sortedMap = new LinkedHashMap<>();
+        unSortedMap.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
+        return sortedMap;
+    }
+    //TODO: Find only the top three toppings using counts
+    public String filterTopThreeToppings(Map<String, Integer> unSortedMap) {
+        int maxCount = 0;
+        String finalTopToppings = null;
+        for (Map.Entry<String, Integer> e : unSortedMap.entrySet()) {
+            if (maxCount != 3) {
+                if (finalTopToppings == null) {
+                    finalTopToppings = e.getKey() + " ";
+                } else {
+                    finalTopToppings = finalTopToppings +" "+ e.getKey();
+                }
+                maxCount = maxCount + 1;
+            } else
+                break;
+        }
+        return finalTopToppings;
+    }
+    // TODO: Sums up all the prices for all orders and users
+    public String calculateTotalSales(ArrayList<XOrder> orders) {
+        double totalSales = 0.0;
+        for (XOrder o : orders) {
+            if (o != null) {
+                totalSales = totalSales + o.getPrice();
+            }
+        }
+        NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
+        System.out.println("US: " + defaultFormat.format(totalSales));
+        return "Total sales to date : " + defaultFormat.format(totalSales);
+
     }
 
     @RequestMapping("/search")
