@@ -61,17 +61,21 @@ public class HomeController {
     }
 
     @PostMapping("/addPizza")
-    public @ResponseBody String addPizza(HttpServletRequest request, HttpServletResponse response,
+    public @ResponseBody String addPizza(@ModelAttribute XOrder order, HttpServletRequest request, HttpServletResponse response,
                                          Authentication auth) {
-        XOrder pizza = new XOrder();
-        pizza.setToppings(pizza.cleanToppings(request.getParameter("toppings")));
-        pizza.setUser(userService.getUser());
-        pizza.setPrice(pizza.calculatePrice(request.getParameter("toppings")));
+//        XOrder pizza = new XOrder();
 
-        if (auth.getAuthorities().toString().equals("[USER]")) {
-            xOrderRepository.save(pizza);
+        order.setToppings(order.cleanToppings(request.getParameter("toppings")));
+        order.setUser(userService.getUser());
+        order.setPrice(order.calculatePrice(request.getParameter("toppings")));
+
+        if (auth.isAuthenticated()) {
+            xOrderRepository.save(order);
 
         }
+
+        // seems can return anything here
+//        return "orderform";
         return null;
 
     }
@@ -81,17 +85,12 @@ public class HomeController {
         return "login";
     }
 
-//    @RequestMapping("/logout")
-//    public String logout() {
-//        return "redirect:/";
+//    @RequestMapping("/secure")
+//    public String secure(Principal principal, Model model) {
+//        String username = principal.getName();
+//        model.addAttribute("user", userRepository.findByUsername(username));
+//        return "secure";
 //    }
-
-    @RequestMapping("/secure")
-    public String secure(Principal principal, Model model) {
-        String username = principal.getName();
-        model.addAttribute("user", userRepository.findByUsername(username));
-        return "secure";
-    }
 
     @RequestMapping("/myorders")
     public String myOrders(Model model) {
@@ -110,80 +109,10 @@ public class HomeController {
         }
 
         model.addAttribute("orders", xOrderRepository.findAll());
-        //TODO: added for top 3 toppings and total sales
-        Map<String, Integer> toppingsByCounts = captureCountOfToppings(xOrderRepository.findAll());
-        Map<String, Integer> sortedToppings = sortToppingsByCounts(toppingsByCounts);
-        model.addAttribute("topThreeToppings", filterTopThreeToppings(sortedToppings));
-        model.addAttribute("totalSales", calculateTotalSales(xOrderRepository.findAll()));
+
         return "admin";
     }
-    // TODO: capture counts for each toppings
-    public Map<String, Integer> captureCountOfToppings(ArrayList<XOrder> orders) {
-        int countOfSpinach = 0;
-        int countOfTomatoes = 0;
-        int countOfBacon = 0;
-        int countOfMushrooms = 0;
-        for (XOrder o : orders) {
-            for (String topping : o.getToppings().split(",")) {
-                if (topping.equalsIgnoreCase("spinach")) {
-                    countOfSpinach += 1;
-                } else if (topping.equalsIgnoreCase("tomatoes")) {
-                    countOfTomatoes += 1;
-                } else if (topping.equalsIgnoreCase("bacon")) {
-                    countOfBacon += 1;
-                } else if (topping.equalsIgnoreCase("mushrooms")) {
-                    countOfMushrooms += 1;
-                } else
-                    continue;
-            }
-        }
-        Map<String, Integer> toppingsAndCounts = new HashMap<>();
-        toppingsAndCounts.put("Spinach", countOfSpinach);
-        toppingsAndCounts.put("Tomatoes", countOfTomatoes);
-        toppingsAndCounts.put("Bacon", countOfBacon);
-        toppingsAndCounts.put("Mushrooms", countOfMushrooms);
-        return toppingsAndCounts;
-    }
-    // TODO: Filter the top three toppings
-    public Map<String, Integer> sortToppingsByCounts(Map<String, Integer> unSortedMap) {
 
-        Map<String, Integer> sortedMap = new LinkedHashMap<>();
-        unSortedMap.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
-        return sortedMap;
-    }
-    //TODO: Find only the top three toppings using counts
-    public String filterTopThreeToppings(Map<String, Integer> sortedMap) {
-        int maxCount = 0;
-        String finalTopToppings = null;
-        for (Map.Entry<String, Integer> e : sortedMap.entrySet()) {
-            if (maxCount != 3) {
-                if (finalTopToppings == null) {
-                    finalTopToppings = e.getKey() + " : " + e.getValue();
-                } else {
-                    finalTopToppings = finalTopToppings +" , "+ e.getKey() + ": " + e.getValue();
-                }
-                maxCount = maxCount + 1;
-            } else
-                break;
-        }
-        return finalTopToppings;
-    }
-    // TODO: Sums up all the prices for all orders and users
-    public String calculateTotalSales(ArrayList<XOrder> orders) {
-        double totalSales = 0.0;
-        for (XOrder o : orders) {
-            if (o != null) {
-                totalSales = totalSales + o.getPrice();
-            }
-        }
-        NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
-        System.out.println("US: " + defaultFormat.format(totalSales));
-        return "Total Sales : " + defaultFormat.format(totalSales);
-
-    }
 
     @RequestMapping("/search")
     public String search(@RequestParam("search") String search, Model model) {
@@ -197,10 +126,30 @@ public class HomeController {
 //        return "show";
 //    }
 
-    @RequestMapping("/update/{id}")
+    @GetMapping("/update/{id}")
     public String updateOrder(@PathVariable("id") long id, Model model) {
-        model.addAttribute("order", xOrderRepository.findById(id).get());
+        XOrder order = xOrderRepository.findById(id).get();
+        model.addAttribute("order", order);
         return "orderform";
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updateOrder(@PathVariable("id") long id, HttpServletRequest request, Model model) {
+//        xOrderRepository.deleteById(id);
+//
+        XOrder order = xOrderRepository.findById(id).get();
+        model.addAttribute("order", order);
+//        System.out.println(xOrderRepository.findById(id).get().getPrice());
+//        xOrderRepository.save(pizza);
+
+        order.setToppings(order.cleanToppings(request.getParameter("toppings")));
+        order.setUser(userService.getUser());
+        order.setPrice(order.calculatePrice(request.getParameter("toppings")));
+
+        xOrderRepository.save(order);
+
+        return "orderform";
+
     }
 
     @RequestMapping("/delete/{id}")

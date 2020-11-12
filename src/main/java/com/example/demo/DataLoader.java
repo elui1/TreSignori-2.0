@@ -35,20 +35,37 @@ public class DataLoader implements CommandLineRunner {
         User user = new User("jim@jim.com", "j", "Jim", "Jimmerson",
                 "j", "111");
         user.setRoles(Arrays.asList(userRole));
+
+        XOrder order = new XOrder("cauliflower, curry, american, spinach, tomatoes, bacon, mushrooms", user, 5.50);
+//        order.setUser(user);
+        xOrderRepository.save(order);
+
+        Set<XOrder> orders = new HashSet<>();
+        orders.add(order);
+        user.setOrders(orders);
         userRepository.save(user);
+
 
         User user1 = new User("jimm@jimm.com", "k", "Jimm", "Jimmmerson",
                 "k", "222");
         user1.setRoles(Arrays.asList(userRole));
+
+        order = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1, 6.00);
+        xOrderRepository.save(order);
+
+        orders = new HashSet<>();
+        orders.add(order);
+        user1.setOrders(orders);
         userRepository.save(user1);
+
 
         User user2 = new User("admin@admin.com", "password", "Admin", "User",
                 "admin", "222");
         user2.setRoles(Arrays.asList(adminRole));
         userRepository.save(user2);
 
-//        XOrder order = new XOrder("cauliflower, curry, american, spinach, tomatoes, bacon, mushrooms", user1);
-//        XOrder order1 = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1);
+
+        //        XOrder order1 = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1);
 //        XOrder order2 = new XOrder("traditional, curry, provolone, tomatoes, bacon, mushrooms", user2);
 //
 //        xOrderRepository.save(order);

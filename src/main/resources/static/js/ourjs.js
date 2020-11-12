@@ -1,4 +1,3 @@
-
 let PIZZA = document.querySelector(".pizza");
 let SAUCE = document.querySelector(".sauce");
 let CHEESE = document.querySelector(".cheese");
@@ -25,9 +24,10 @@ menuForm.addEventListener("change", (e)=> {
     e.preventDefault();
     if(cau.checked == true) {
         console.log("cauliflower");
-
-            toppings= toppings + " ,cauliflower";
-
+        if(toppings!=null)
+            toppings= toppings +" ,cauliflower";
+        else
+            toppings=toppings;
         PIZZA.style.backgroundColor = "cornsilk";
     } else if (who.checked == true) {
         console.log("whole wheat");
@@ -199,14 +199,16 @@ pf.addEventListener("submit", (e)=> {
     e.preventDefault();
     console.log("form test");
     // toggle to visible
-    receipt.style.visibility = "visible";
     // alert: if checkboxes checked < 2
     // document.getElementsByTagName("FORM").style.display = "none";
 
     if(document.querySelectorAll('input[type="checkbox"]:checked').length < 2){
-        alert("Two toppings are included with your pizza. Please add one.")
-    }
+        alert("Two toppings are included with your pizza. Please add one.");
+        resetInputs();
+    } else {
 
+        receipt.style.visibility = "visible";
+    }
 
     // let selected = new Array();
     let chks = document.getElementsByTagName("INPUT");
@@ -264,10 +266,7 @@ pf.addEventListener("submit", (e)=> {
     price.innerHTML = selected[7];
 });
 
-let reset = document.querySelector("#reset");
-reset.addEventListener("click", (e)=> {
-    e.preventDefault();
-    // uncheck the entire page?
+function resetInputs(){
     PIZZA.style.backgroundColor = "wheat";
     SAUCE.style.backgroundColor = "wheat";
     CHEESE.style.backgroundColor = "wheat";
@@ -290,17 +289,28 @@ reset.addEventListener("click", (e)=> {
     pro.checked = false;
 
     pd.innerHTML = "$5.00";
+    receipt.style.visibility = "hidden";
+
+}
+
+let reset = document.querySelector("#reset");
+reset.addEventListener("click", (e)=> {
+    e.preventDefault();
+    // uncheck the entire page?
+    resetInputs();
 });
 
 
 
 // AJAX ADDED BELOW //
 
+
 // let selected = `${cau.value}, ${who.value}, ${tra.value}, ${cur.value}, ${cre.value}, ${mar.value}, ${moz.value}, ${ame.value}, ${pro.value}`;
 // THIS WORKS FOR NUMBER let selected = document.querySelectorAll('input:checked').length;
 // let selected = document.querySelectorAll('input:checked').value;
 
 //Below: For non-Codepen
+
 function sub() {
     $.ajax({
         type: "POST",
@@ -317,10 +327,3 @@ function sub() {
         }
     });
 }
-
-
-
-
-
-
-

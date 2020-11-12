@@ -22,15 +22,15 @@ public class XOrder {
 
     private final double basePrice = 5.00;
 
-    public XOrder(String toppings, User user) {
-        dateTime= LocalDateTime.now();
+    public XOrder(String toppings, User user, double price) {
+        dateTime = LocalDateTime.now();
         this.toppings = toppings;
         this.user = user;
-        this.price = 10.99;
+        this.price = price;
     }
 
     public XOrder() {
-       dateTime= LocalDateTime.now();
+       dateTime = LocalDateTime.now();
     }
 
     public LocalDateTime getDateTime() {
