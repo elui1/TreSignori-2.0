@@ -8,52 +8,70 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body style="background-repeat: no-repeat; background-size: cover;">
+<body style="background-size:cover;">
+
 <div th:replace="base :: navlinks"></div>
 
-<div class="slider-item">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row slider-text align-items-center" data-scrollax-parent="true">
+<div class="flex-wrapper">
+    <div class="slider-item">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text align-items-center" data-scrollax-parent="true">
 
-            <div class="col-md-6 col-sm-12 <!--ftco-animate-->">
-                <span class="subheading">Incredible</span>
-                <h1 class="mb-4">San Antonio's Pizza</h1>
-                <p class="mb-4 mb-md-5"> “My soul tasted that heavenly food, which gives new appetite while it satiates.” -- Dante</p>
-                <p><a href="/addPizza" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
-            </div>
-            <div class="col-md-6 <!--ftco-animate-->">
-                <img src="images/bg_1.png" class="img-fluid" alt="">
+                <div class="col-md-6 col-sm-12 <!--ftco-animate-->">
+                    <span class="subheading">Delicious</span>
+                    <h1 class="mb-4">Italian Cuisine</h1>
+                    <p class="mb-4 mb-md-5"> “My soul tasted that heavenly food, which gives new appetite while it
+                        satiates.” -- Dante</p>
+                    <p><a href="/addPizza" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a>
+                        <!--                    <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>-->
+                </div>
+                <div class="col-md-6 <!--ftco-animate-->">
+                    <img src="images/bg_1.png" class="img-fluid" alt="">
+                </div>
             </div>
         </div>
     </div>
-</div>
-
     <div th:replace="base :: footer "></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+    p, span {
+        color: white;
+    }
 
-    <style>
-        p, span {
-            color: white;
-        }
-        footer {
-            background-color: black;
-        }
-    </style>
+    footer {
+        /*clear: both;*/
+        /*margin: 0px auto;*/
+        /*position: fixed;*/
+        background-color: gray;
+        color: white;
+    }
+
+    /*body {*/
+    /*    background-color:white;*/
+
+    /*    !*color: gray;*!*/
+    /*    background-image:*/
+    /*            linear-gradient(90deg, rgba(255,0,0,.5) 50%, transparent 50%),*/
+    /*            linear-gradient(rgba(255,0,0,.5) 50%, transparent 50%);*/
+    /*    background-size: cover; }*/
+</style>
 </body>
 </html>
 
@@ -147,8 +165,6 @@
 <!--</body>-->
 <!--</html>-->
 <!--<div th:replace="base :: navlinks"></div>-->
-
-
 
 
 <!--&lt;!&ndash;<div class="jumbotron jumbotron-fluid" style="background-image: url(images/bg_1.jpg);">&ndash;&gt;-->

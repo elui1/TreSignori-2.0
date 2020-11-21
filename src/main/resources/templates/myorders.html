@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Tre Signori</title>
+    <title>My Orders</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/styles.css">
@@ -19,63 +20,72 @@ background-size: cover;">
 
 
 <!--<h1>My Orders</h1>-->
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-image">
-                <thead>
-                <tr>
-                    <th scope="col">Username</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Pizza</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Toppings</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="order: ${orders}">
+<div class="flex-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-image">
+                    <thead>
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Pizza</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Toppings</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order: ${orders}">
 
-                    <th scope="row" th:text="${order.user.username}"></th>
+                        <th scope="row" th:text="${order.user.username}"></th>
                         <td th:text="${#temporals.format(order.dateTime,'MMM-dd-yyyy hh:mm a')}"></td>
-                            <td class="w-15">
-                                <div th:if="${order.toppings.contains('cauliflower')}">
-                                    <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/B.jpg"
-                                         class="img-fluid img-thumbnail" alt="Cauliflower">
-                                </div>
-                                <div th:if="${order.toppings.contains('whole wheat')}">
-                                    <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/P.jpg"
-                                         class="img-fluid img-thumbnail" alt="Whole wheat">
-                                </div>
-                                <div th:if="${order.toppings.contains('traditional')}">
-                                    <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/V.jpg"
-                                         class="img-fluid img-thumbnail" alt="Traditional">
-                                </div>
-                            </td>
-
-                        <td th:text="${#numbers.formatCurrency(order.price)}"></td>
+                        <td class="w-10">
+                            <div th:if="${order.toppings.contains('cauliflower')}">
+                                <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/B.jpg"
+                                     class="img-fluid img-thumbnail" alt="Cauliflower">
+                            </div>
+                            <div th:if="${order.toppings.contains('whole wheat')}">
+                                <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/P.jpg"
+                                     class="img-fluid img-thumbnail" alt="Whole wheat">
+                            </div>
+                            <div th:if="${order.toppings.contains('traditional')}">
+                                <img src="https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583615254/pizza/V.jpg"
+                                     class="img-fluid img-thumbnail" alt="Traditional">
+                            </div>
+                        </td>
+                        <td class="w-10" th:text="${#numbers.formatCurrency(order.price)}"></td>
                         <td class="w-25" th:text="${order.toppings}"></td>
-
-                    <td>
+                        <td th:text="${order.user.email}"></td>
+                        <td>
                         <span>
 <!--                            <a class="btn btn-primary" th:href="@{/detail/{id}(id=${order.id})}">Details</a>-->
                             <a class="btn btn-warning" th:href="@{/update/{id}(id=${order.id})}">Update</a>
                             <a class="btn btn-danger" th:href="@{/delete/{id}(id=${order.id})}">Delete</a>
                         </span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-<div th:replace="base :: footer "></div>
+    <div th:replace="base :: footer "></div>
+</div>
 
 <style>
     .container {
         color: white;
     }
+
+    /*.flex-wrapper {*/
+    /*    display: flex;*/
+    /*    min-height: 100vh;*/
+    /*    flex-direction: column;*/
+    /*    justify-content: space-between*/
+    /*}*/
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

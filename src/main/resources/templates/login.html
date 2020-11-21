@@ -1,50 +1,110 @@
 <!DOCTYPE html >
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Account Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body style="background-image:url('images/bg_1.jpg'); background-repeat: no-repeat; background-size: cover;">
+<!--<body style="background-image:url('images/bg_1.jpg'); background-repeat: no-repeat; background-size: cover;">-->
+<body style="background-image: radial-gradient(closest-side at 50% 135%, #ffffff 50%, #eceff1 100%);">
 <div th:replace="base :: navlinks"></div>
 
-<div class="log-container">
-    <h1>Login Page</h1>
-    <div th:if="${param.error}">
-        Invalid username or password
-    </div>
-    <div th:if="${param.logout}">
-        You have been logged out
-    </div>
+<div class="flex-wrapper">
+    <div class="log-container">
+        <a class="navbar-brand">
+            <!--Pizza<br>-->
+            <!--        <span class="flaticon-pizza-1 mr-2"></span>Pizza<small1>Delicious</small1></a>-->
+            <span class="flaticon-pizza-1 mr-2"></span>
+            <img src="images/bg_1.png" class="img-thumbnail1" alt="Traditional">
+            <small1>Tre Signori</small1>
+        </a>
 
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label>User name: </label>
-            <input type="text" name="username" required />
+        <div th:if="${param.error}" style="color: red;">
+            Invalid username or password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
         </div>
 
-        <div>
-            <label>Password: </label>
-            <input type="password" name="password" required />
-        </div>
-        <div>
-            <input class="btn btn-primary" type="submit" value="Sign in"/>
-        </div>
-        <div>
-            <a href="/register">Don’t have an account yet? Click here to register.</a>
-        </div>
-    </form>
+        <form th:action="@{/login}" method="post">
+            <div>
+                <label>Username</label>
+                <input type="text" name="username" required/>
+            </div>
+
+            <div>
+                <label>Password</label>
+                <input type="password" name="password" required/>
+            </div>
+            <div>
+                <input class="btn btn-primary" type="submit" value="Sign in"/>
+            </div>
+            <div>
+                <a href="/register">Don’t have an account yet? Click here to register.</a>
+            </div>
+        </form>
+    </div>
+    <div th:replace="base :: footer"></div>
 </div>
 
-<!--</div>-->
-<div  th:replace="base :: footer"></div>
+<style>
+    /*body {*/
+    /*    background: white none;*/
+    /*}*/
+
+    /*h1 {*/
+    /*    margin: 0 auto;*/
+    /*    display: inline-block;*/
+    /*    align-self: center;*/
+    /*}*/
+
+    label {
+        display: block;
+        color: black;
+        text-align: left;
+        margin-left: 5px;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 400px;
+        height: 50px;
+    }
+
+    input[type="submit"] {
+        align-self: center;
+        text-align: center;
+        width: 400px;
+        height: 50px;
+    }
+
+    .log-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        width: 470px;
+        background: white;
+        margin: 1.3rem auto;
+        text-align: center;
+    }
+
+    /*footer {*/
+    /*    background-color: black;*/
+    /*}*/
+
+</style>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -55,40 +115,5 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<style>
-
-    h1 {
-        margin: 0 auto;
-        display: inline-block;
-        align-self: center;
-    }
-
-    label {
-        display: block;
-        color: white;
-    }
-
-    input[type="text"], input[type="password"] {
-        width: 400px;
-    }
-
-    input[type="submit"] {
-        align-self: center;
-        text-align: center;
-        width: 400px;
-    }
-
-    .log-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-        align-items: center;
-    }
-    footer {
-        background-color: black;
-    }
-
-</style>
 </body>
 </html>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
-<!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+    <title>Make Your Pizza</title>
+    <!--    <meta http-equiv="X-UA-Compatible" content="IE=11">-->
+    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
+    <!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
@@ -15,8 +17,13 @@
     <script src="https://kit.fontawesome.com/9c2c348e64.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
 
+    <!--    <link rel="stylesheet" href="../static/css/normalize.css">-->
+    <!--    <link rel="stylesheet" href="../static/css/style.css">-->
+    <!--    <link rel="stylesheet" href="../static/css/styles.css">-->
+
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/styles.css">
+
 </head>
 <body>
 <div th:replace="base :: navlinks"></div>
@@ -28,98 +35,103 @@
 <!--    <p><i class="fas fa-search"></i><input type="search" placeholder="search"></p>-->
 
 <!--</nav>-->
-
-<main>
-    <div class="place-mat">
-        <div class="plate">
-            <div class="pizza">
-                <div class="sauce" style="visibility:hidden">
-                    <div class="cheese" style="visibility:hidden">
-                        <img id="ing1" src="#" alt="topping" style="visibility:hidden">
-                        <img id="ing2" src="#" alt="topping" style="visibility:hidden">
-                        <img id="ing3" src="#" alt="topping" style="visibility:hidden">
-                        <img id="ing4" src="#" alt="topping" style="visibility:hidden">
+<div class="flex-wrapper">
+    <main>
+        <div class="place-mat">
+            <div class="plate">
+                <div class="pizza">
+                    <div class="sauce" style="visibility:hidden">
+                        <div class="cheese" style="visibility:hidden">
+                            <img id="ing1" src="#" alt="topping" style="visibility:hidden">
+                            <img id="ing2" src="#" alt="topping" style="visibility:hidden">
+                            <img id="ing3" src="#" alt="topping" style="visibility:hidden">
+                            <img id="ing4" src="#" alt="topping" style="visibility:hidden">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="receipt">
-        <p id="date">Date:</p>
-        <p>Summary of Purchase:</p>
-        <ul>
-            <li id="dough">Dough:</li>
-            <li id="sauce">Sauce:</li>
-            <li id="cheese">Cheese:</li>
-            <li id="toppingOne">Topping</li>
-            <li id="toppingTwo">Placeholder</li>
-            <li id="toppingThree">Placeholder</li>
-            <li id="toppingFour">Placeholder</li>
-        </ul>
-        <p id="price">Price:</p>
-        <a href="/myorders">See Your Orders</a>
-        <p>Thank You, Buona Giornata</p>
-    </div>
+        <div id="receipt">
+            <p id="date">Date:</p>
+            <p>Summary of Purchase:</p>
+            <ul>
+                <li id="dough">Dough:</li>
+                <li id="sauce">Sauce:</li>
+                <li id="cheese">Cheese:</li>
+                <li id="toppingOne">Topping</li>
+                <li id="toppingTwo">Placeholder</li>
+                <li id="toppingThree">Placeholder</li>
+                <li id="toppingFour">Placeholder</li>
+            </ul>
+            <p id="price">Price:</p>
+            <div sec:authorize="hasAuthority('ADMIN')">
+                <a href="/admin">See Your Orders</a>
+            </div>
+            <div sec:authorize="hasAuthority('USER')">
+                <a href="/myorders">See Your Orders</a>
+            </div>
+            <p>Thank You, Buona Giornata</p>
+        </div>
 
 
-    <aside>
+        <aside>
 
-        <h2 class="boss">Buongiorno! How would you like your pizza?</h2>
+            <h4 class="boss">Buongiorno! How would you like your pizza?</h4>
 
-        <form action="#" th:action="@{/addPizza}" th:object="${order}" method="post" id="pizzaForm">
-            <input type="text" th:field="*{id}" id="pizzaFor"/>
+            <form action="#" th:action="@{/addPizza}" th:object="${order}" method="post" id="pizzaForm">
+                <input type="hidden" th:field="*{id}" id="pizzaFor"/>
 
-            <fieldset id="form1" action="#">
-                <legend>Dough</legend>
-                <ul>
-                    <li><input id="cau" type="radio" name="dough" value="cauliflower">Cauliflower</li>
-                    <li><input id="who" type="radio" name="dough" value="whole wheat">Whole Wheat</li>
-                    <li><input id="tra" type="radio" name="dough" value="traditional">Traditional</li>
-                </ul>
-            </fieldset>
+                <fieldset id="form1" action="#">
+                    <legend>Dough</legend>
+                    <ul>
+                        <li><input id="cau" type="radio" name="dough" value="cauliflower">Cauliflower</li>
+                        <li><input id="who" type="radio" name="dough" value="whole wheat">Whole Wheat</li>
+                        <li><input id="tra" type="radio" name="dough" value="traditional">Traditional</li>
+                    </ul>
+                </fieldset>
 
-            <fieldset id="form2">
-                <legend>Sauce</legend>
-                <ul>
-                    <li><input id="cur" type="radio" name="sauce" value="curry">Curry</li>
-                    <li><input id="cre" type="radio" name="sauce" value="cream">Cream</li>
-                    <li><input id="mar" type="radio" name="sauce" value="marinara">Marinara</li>
-                </ul>
-            </fieldset>
+                <fieldset id="form2">
+                    <legend>Sauce</legend>
+                    <ul>
+                        <li><input id="cur" type="radio" name="sauce" value="curry">Curry</li>
+                        <li><input id="cre" type="radio" name="sauce" value="cream">Cream</li>
+                        <li><input id="mar" type="radio" name="sauce" value="marinara">Marinara</li>
+                    </ul>
+                </fieldset>
 
-            <fieldset id="form3" action="#">
-                <legend>Cheese</legend>
-                <ul>
-                    <li><input id="moz" type="radio" name="cheese" value="mozzarella">Mozzarella</li>
-                    <li><input id="ame" type="radio" name="cheese" value="american">American</li>
-                    <li><input id="pro" type="radio" name="cheese" value="provolone">Provolone</li>
-                </ul>
-            </fieldset>
+                <fieldset id="form3" action="#">
+                    <legend>Cheese</legend>
+                    <ul>
+                        <li><input id="moz" type="radio" name="cheese" value="mozzarella">Mozzarella</li>
+                        <li><input id="ame" type="radio" name="cheese" value="american">American</li>
+                        <li><input id="pro" type="radio" name="cheese" value="provolone">Provolone</li>
+                    </ul>
+                </fieldset>
 
-            <fieldset id="form4">
-                <legend>Toppings</legend>
-                <ul>
-                    <li><input id="spi" name="toppings" value="spinach" type="checkbox">Spinach</li>
-                    <li><input id="tom" name="toppings" value="tomatoes" type="checkbox">Tomatoes</li>
-                    <li><input id="bac" name="toppings" value="bacon" type="checkbox">Bacon</li>
-                    <li><input id="mus" name="toppings" value="mushrooms" type="checkbox">Mushrooms</li>
-                </ul>
-            </fieldset>
-            <legend id="price-display">Price: $5.00</legend>
-            <i class="fas fa-shopping-cart"></i>
+                <fieldset id="form4">
+                    <legend>Toppings</legend>
+                    <ul>
+                        <li><input id="spi" name="toppings" value="spinach" type="checkbox">Spinach</li>
+                        <li><input id="tom" name="toppings" value="tomatoes" type="checkbox">Tomatoes</li>
+                        <li><input id="bac" name="toppings" value="bacon" type="checkbox">Bacon</li>
+                        <li><input id="mus" name="toppings" value="mushrooms" type="checkbox">Mushrooms</li>
+                    </ul>
+                </fieldset>
+                <legend id="price-display">Price: $5.00</legend>
+                <i class="fas fa-shopping-cart"></i>
 
-            <input type="submit" value="Submit"/>
-            <a href="/addPizza"> <button id="reset">Reset</button></a>
-        </form>
-        <!-- inside or outside?   -->
+                <input type="submit" value="Submit"/>
+                <a href="/addPizza">
+                    <button id="reset">Reset</button>
+                </a>
+            </form>
+            <!-- inside or outside?   -->
 
-    </aside>
-</main>
-<footer style="background-color: brown;">
-    <p>&copy;2020 Tre Signori</p>
-    <p>Salute!</p>
-</footer>
+        </aside>
+    </main>
+    <div th:replace="base :: footer "></div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -137,7 +149,6 @@
 
     // save orders on backend with AJAX
     // to Express?
-
 
     let PIZZA = document.querySelector(".pizza");
     let SAUCE = document.querySelector(".sauce");
@@ -161,16 +172,14 @@
     let toppings = null;
 
     let idElement = document.getElementById("pizzaFor");
-    // document.write(idElement.value);
-
 
     let menuForm = document.querySelector("#form1");
-    menuForm.addEventListener("change", (e)=> {
+    menuForm.addEventListener("change", (e) => {
         e.preventDefault();
-        if(cau.checked == true) {
+        if (cau.checked == true) {
             console.log("cauliflower");
 
-                toppings= toppings +" ,cauliflower";
+            toppings = toppings + " ,cauliflower";
 
             PIZZA.style.backgroundColor = "cornsilk";
         } else if (who.checked == true) {
@@ -185,26 +194,28 @@
     });
 
     let menuForm2 = document.querySelector("#form2");
-    menuForm2.addEventListener("change", (e)=> {
+    menuForm2.addEventListener("change", (e) => {
         e.preventDefault();
-        if(cau.checked == false && who.checked === false && tra.checked == false) {
+        if (cau.checked == false && who.checked === false && tra.checked == false) {
             alert("must start with dough");
             cur.checked = false;
             cre.checked = false;
             mar.checked = false;
 
         } else if (cau.checked == true || who.checked == true || tra.checked == true) {
-            if(cur.checked == true) {
+            if (cur.checked == true) {
                 console.log("curry");
                 toppings = toppings + " ,curry";
                 SAUCE.style.visibility = "visible";
                 SAUCE.style.backgroundColor = "orange";
-            } if (cre.checked == true) {
+            }
+            if (cre.checked == true) {
                 console.log("cream");
                 toppings = toppings + " , cream";
                 SAUCE.style.visibility = "visible";
                 SAUCE.style.backgroundColor = "oldlace";
-            } if (mar.checked == true) {
+            }
+            if (mar.checked == true) {
                 console.log("marinara");
                 toppings = toppings + " ,marinara";
                 SAUCE.style.visibility = "visible";
@@ -214,17 +225,17 @@
     });
 
     let menuForm3 = document.querySelector("#form3");
-    menuForm3.addEventListener("change", (e)=> {
+    menuForm3.addEventListener("change", (e) => {
         e.preventDefault();
-        if(cau.checked == false && who.checked == false && tra.checked == false
-            && cur.checked == false && cre.checked == false && mar.checked == false){
+        if (cau.checked == false && who.checked == false && tra.checked == false
+            && cur.checked == false && cre.checked == false && mar.checked == false) {
             alert("you must check dough and sauce first");
             // reset to unchecked radio
             moz.checked = false;
             ame.checked = false;
             pro.checked = false;
         } else if (cur.checked == true || cre.checked == true || mar.checked == true) {
-            if(moz.checked == true) {
+            if (moz.checked == true) {
                 console.log("mozza");
                 toppings = toppings + " ,mozzarella";
                 CHEESE.style.visibility = "visible";
@@ -246,13 +257,13 @@
     function priceChanger() {
         let counter = document.querySelectorAll('input[type="checkbox"]:checked').length;
 
-        if(counter == 1) {
+        if (counter == 1) {
             pd.innerHTML = "Price: $5.00";
         } else if (counter == 2) {
             pd.innerHTML = "Price: $5.00";
-        } else if (counter == 3){
+        } else if (counter == 3) {
             pd.innerHTML = "Price: $5.50";
-        } else if (counter == 4){
+        } else if (counter == 4) {
             pd.innerHTML = "Price: $6.00";
         } else {
             console.log("testing priceChanger");
@@ -261,11 +272,11 @@
     }
 
     let menuForm4 = document.querySelector("#form4");
-    menuForm4.addEventListener("change", (e)=> {
+    menuForm4.addEventListener("change", (e) => {
         e.preventDefault();
-        if(cau.checked == false && who.checked == false && tra.checked == false
+        if (cau.checked == false && who.checked == false && tra.checked == false
             && cur.checked == false && cre.checked == false && mar.checked == false
-            && moz.checked == false && ame.checked == false && pro.checked == false){
+            && moz.checked == false && ame.checked == false && pro.checked == false) {
             console.log("test");
             alert("Dough, sauce, cheese, and then toppings.");
             spi.checked = false;
@@ -339,14 +350,14 @@
     // how do you hide... the
 
 
-    pf.addEventListener("submit", (e)=> {
+    pf.addEventListener("submit", (e) => {
         e.preventDefault();
         console.log("form test");
         // toggle to visible
         // alert: if checkboxes checked < 2
         // document.getElementsByTagName("FORM").style.display = "none";
 
-        if(document.querySelectorAll('input[type="checkbox"]:checked').length < 2){
+        if (document.querySelectorAll('input[type="checkbox"]:checked').length < 2) {
             alert("Two toppings are included with your pizza. Please add one.");
             resetInputs();
         } else {
@@ -363,12 +374,12 @@
         }
 
         // add nulls...
-        if(selected.length == 6) {
+        if (selected.length == 6) {
             // add one null
             selected.push("")
         } else if (selected.length == 5) {
             // add two nulls
-            selected.push("","");
+            selected.push("", "");
         } else if (selected.length == 4) {
             // add three nulls
             selected.push("", "", "")
@@ -387,8 +398,7 @@
             update();
             console.log(idElement.value);
 
-        }
-        else {
+        } else {
             sub();
             console.log(idElement.value);
 
@@ -405,7 +415,7 @@
                     console.log(result);
                     // window.location.href = "/";
                 },
-                error: function(result) {
+                error: function (result) {
                     window.location.href = "/login";
                 }
             });
@@ -422,7 +432,7 @@
                     console.log(result);
                     // window.location.href = "/";
                 },
-                error: function(result) {
+                error: function (result) {
                     window.location.href = "/login";
                 }
             });
@@ -455,7 +465,7 @@
 
     });
 
-    function resetInputs(){
+    function resetInputs() {
         PIZZA.style.backgroundColor = "wheat";
         SAUCE.style.backgroundColor = "wheat";
         CHEESE.style.backgroundColor = "wheat";
@@ -483,12 +493,11 @@
     }
 
     let reset = document.querySelector("#reset");
-    reset.addEventListener("click", (e)=> {
+    reset.addEventListener("click", (e) => {
         e.preventDefault();
         // uncheck the entire page?
         resetInputs();
     });
-
 
 
     // AJAX ADDED BELOW //
@@ -517,6 +526,19 @@
     //     });
     // }
 
+
 </script>
+<style>
+    .flex-wrapper {
+        display: flex;
+        min-height: 150vh;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /*body {*/
+    /*    max-height: 900px;*/
+    /*}*/
+</style>
 </body>
 </html>

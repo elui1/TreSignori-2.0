@@ -36,25 +36,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/h2-console/**", "/css/**", "/fonts/**", "/images/**",
-                        "/js/**", "/scss/**", "/register", "/addPizza", "/admin").permitAll()
-//                .antMatchers("/admin").access("hasAuthority('ADMIN')")
-//                .anyRequest().authenticated()
+                        "/js/**", "/scss/**", "/register", "/addPizza").permitAll()
+                .antMatchers("/admin").access("hasAuthority('ADMIN')")
+
+                .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
+
 //                .and().logout()
 //                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 //                .logoutSuccessUrl("/login").permitAll().permitAll()
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll().permitAll()
                 .and()
                 .httpBasic();
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+                http.csrf().disable();
+                http.headers().frameOptions().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsServiceBean())
             .passwordEncoder(passwordEncoder());
+//        auth.inMemoryAuthentication().withUser("user")
+//                .password(passwordEncoder().encode("password")).authorities("USER");
     }
 
 

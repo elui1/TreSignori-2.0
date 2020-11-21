@@ -32,8 +32,8 @@ public class DataLoader implements CommandLineRunner {
         Role adminRole = roleRepository.findByRole("ADMIN");
         Role userRole = roleRepository.findByRole("USER");
 
-        User user = new User("jim@jim.com", "j", "Jim", "Jimmerson",
-                "j", "111");
+        User user = new User("jim@jim.com", "jimmerson", "Jim", "Jimmerson",
+                "jim", "111");
         user.setRoles(Arrays.asList(userRole));
 
         XOrder order = new XOrder("cauliflower, curry, american, spinach, tomatoes, bacon, mushrooms", user, 5.50);
@@ -46,8 +46,8 @@ public class DataLoader implements CommandLineRunner {
         userRepository.save(user);
 
 
-        User user1 = new User("jimm@jimm.com", "k", "Jimm", "Jimmmerson",
-                "k", "222");
+        User user1 = new User("jimm@jimm.com", "jimmmerson", "Jimm", "Jimmmerson",
+                "jimm", "222");
         user1.setRoles(Arrays.asList(userRole));
 
         order = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1, 6.00);

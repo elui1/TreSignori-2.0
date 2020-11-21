@@ -1,10 +1,48 @@
-body{
+/*html {*/
+/*   position: relative;*/
+/*   min-width: 1024px;*/
+/*   min-height: 768px;*/
+/*   height: 100%;*/
+/*}*/
+
+html, body {
+  /*width: 100%;*/
+  /*height: 100%;*/
+  /*overflow-y: auto;*/
+  /*position: relative;*/
+  /*height: 768px;*/
+}
+
+body {
+  /*width: 1024px;*/
+  /*height: 700px;*/
+  /*height: auto;*/
+  /*overflow: auto;*/
   background-color:white;
   background-image:
           linear-gradient(90deg, rgba(255,0,0,.5) 50%, transparent 50%),
           linear-gradient(rgba(255,0,0,.5) 50%, transparent 50%);
   background-size:50px 50px;
+  /*background-repeat: no-repeat;*/
+  /*background-size: cover;*/
 }
+
+/*body {*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*  overflow-y: auto;*/
+/*}*/
+
+/*html {*/
+/*  height: 100%;*/
+/*}*/
+
+/*body {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  min-height: 100vh;*/
+/*  margin:0;*/
+/*}*/
 
 nav {
   display: flex;
@@ -23,14 +61,22 @@ nav a {
 }
 
 main {
+  height: 500px;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 1fr 1fr 3fr;
 }
 
 aside {
+  /*clear: both;*/
+  /*float: right;*/
+  /*position: absolute;*/
+  /*width: 200px;*/
+  /*top: 300px;*/
+  /*bottom: 20px;*/
+
   padding: 20px;
-  height: 100vh;
+  /*height: 100vh;*/
   background-color: white;
   font-family: 'Quicksand', sans-serif;
   background-color: rgba(252, 236, 212, 1);
@@ -45,10 +91,12 @@ aside {
 
 #price-display {
   float: right;
+  margin-top: 10px;
 }
 
 li {
   list-style: none;
+  margin-bottom: -5px;
 }
 
 h2 {
@@ -61,7 +109,7 @@ a:nth-of-type(2) + p, a:nth-of-type(2) {
 }
 
 input {
-  margin: 5px;
+  margin: 10px 5px;
 }
 
 .place-mat {
@@ -147,12 +195,18 @@ input {
 }
 
 footer {
-  background-color: brown;
-  position: fixed;
+  /*clear: both;*/
+  /*position: relative;*/
+  /*height: 100px;*/
+  /*margin-top: 400px;*/
+  /*clear: both;*/
+  /*margin: 0px auto;*/
+  background-color: white;
+  /*position: fixed;*/
   bottom: 0;
   width: 100%;
   font-family: 'Kaushan Script', cursive;
-  color: white;
+  color: gray;
 }
 /*.container {*/
 /*  padding: 2rem 0rem;*/
@@ -173,9 +227,34 @@ h4 {
 
 .boss {
   color: black;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .w-15 {
   width: 15% !important;
 }
 
+.flex-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between
+}
+
+/*#pizzaForm {*/
+/*  height: 150px;*/
+/*}*/
+
+/*#form1 {*/
+/*  height: 5px;*/
+/*}*/
+
+/*ul {*/
+/*  height: 10px;*/
+/*}*/
+fieldset {
+  /*margin:0px;*/
+  margin-bottom: -20px;
+  padding: 0px;
+}
