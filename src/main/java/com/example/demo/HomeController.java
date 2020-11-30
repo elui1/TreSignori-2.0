@@ -45,7 +45,8 @@ public class HomeController {
             userService.saveUser(user);
             model.addAttribute("message", "User Account Created");
         }
-        return "redirect:/";
+//        return "redirect:/";
+        return "redirect:/login";
     }
 
     @RequestMapping("/")
@@ -61,7 +62,7 @@ public class HomeController {
     }
 
     @PostMapping("/addPizza")
-    public @ResponseBody String addPizza(@ModelAttribute XOrder order, HttpServletRequest request, HttpServletResponse response,
+    public @ResponseBody void addPizza(@ModelAttribute XOrder order, HttpServletRequest request, HttpServletResponse response,
                                          Authentication auth) {
 //        XOrder pizza = new XOrder();
 
@@ -71,12 +72,7 @@ public class HomeController {
 
         if (auth.isAuthenticated()) {
             xOrderRepository.save(order);
-
         }
-
-        // seems can return anything here
-//        return "orderform";
-        return null;
 
     }
 

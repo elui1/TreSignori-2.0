@@ -32,11 +32,11 @@ public class DataLoader implements CommandLineRunner {
         Role adminRole = roleRepository.findByRole("ADMIN");
         Role userRole = roleRepository.findByRole("USER");
 
-        User user = new User("jim@jim.com", "jimmerson", "Jim", "Jimmerson",
-                "jim", "111");
+        User user = new User("jim@jim.com", "j", "Jim", "Jimmerson",
+                "j", "111");
         user.setRoles(Arrays.asList(userRole));
 
-        XOrder order = new XOrder("cauliflower, curry, american, spinach, tomatoes, bacon, mushrooms", user, 5.50);
+        XOrder order = new XOrder("cauliflower, curry, american, spinach, tomatoes, bacon, mushrooms", user, 6.00);
 //        order.setUser(user);
         xOrderRepository.save(order);
 
@@ -50,7 +50,7 @@ public class DataLoader implements CommandLineRunner {
                 "jimm", "222");
         user1.setRoles(Arrays.asList(userRole));
 
-        order = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1, 6.00);
+        order = new XOrder("traditional, cream, provolone, tomatoes, bacon, mushrooms", user1, 5.50);
         xOrderRepository.save(order);
 
         orders = new HashSet<>();
@@ -59,8 +59,8 @@ public class DataLoader implements CommandLineRunner {
         userRepository.save(user1);
 
 
-        User user2 = new User("admin@admin.com", "password", "Admin", "User",
-                "admin", "222");
+        User user2 = new User("admin@admin.com", "p", "Admin", "User",
+                "a", "222");
         user2.setRoles(Arrays.asList(adminRole));
         userRepository.save(user2);
 

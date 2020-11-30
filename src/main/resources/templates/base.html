@@ -10,9 +10,9 @@
     <div sec:authorize="isAnonymous()">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"><span class="flaticon-pizza-1 mr-1"></span><img src="images/bg_1.png"
+                <a class="navbar-brand" href="/"><span class="flaticon-pizza-1 mr-1"></span><img src="/images/bg_1.png"
                                                                                                  class="img-thumbnail2"
-                                                                                                 alt="Traditional">&nbsp&nbsp<small>Tre
+                                                                                                 alt="Traditional">&nbsp;&nbsp;<small>Tre
                     Signori</small></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                         aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
     <div sec:authorize="isAuthenticated()">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"><span class="flaticon-pizza-1 mr-1"></span><img src="images/bg_1.png"
+                <a class="navbar-brand" href="/"><span class="flaticon-pizza-1 mr-1"></span><img src="/images/bg_1.png"
                                                                                                  class="img-thumbnail2"
                                                                                                  alt="Traditional">&nbsp&nbsp<small>Tre
                     Signori</small></a>
@@ -60,7 +60,7 @@
                         <!--                            <a class="nav-link" href="/register">Register</a>-->
                         <!--                        </li>-->
                         <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                            <a href="/admin" class="nav-link">Admin</a>
+                            <a href="/admin" class="nav-link">Admin Report</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasAuthority('USER')">
                             <a href="/myorders" class="nav-link">My Orders</a>
@@ -74,11 +74,7 @@
         </nav>
     </div>
 </div>
-<style>
-    footer {
-        background-color: blue;
-    }
-</style>
+
 <div th:fragment="footer">
     <!--     <div style="clear: both"></div>-->
     <!--     <footer>-->
@@ -86,6 +82,13 @@
     </footer>
 
 </div>
+<style>
+    /*footer {*/
+    /*    !*background-color: blue;*!*/
+    /*    left: 0; right: 0; bottom: 0;*/
+    /*}*/
+</style>
+
 
 </body>
 </html>

@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Make Your Pizza</title>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
     <!--    <meta http-equiv="X-UA-Compatible" content="IE=11">-->
     <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
     <!--          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
@@ -21,22 +22,28 @@
     <!--    <link rel="stylesheet" href="../static/css/style.css">-->
     <!--    <link rel="stylesheet" href="../static/css/styles.css">-->
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .flex-wrapper {
+            display: flex;
+            min-height: 150vh;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
+        footer {
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="base :: navlinks"></div>
 
-
-<!--<nav>-->
-<!--    <a id="logo" href="#">Tre Signori</a>-->
-<!--    <a href="#">Contact Us</a>-->
-<!--    <p><i class="fas fa-search"></i><input type="search" placeholder="search"></p>-->
-
-<!--</nav>-->
 <div class="flex-wrapper">
-    <main>
+    <div class="all">
         <div class="place-mat">
             <div class="plate">
                 <div class="pizza">
@@ -129,9 +136,11 @@
             <!-- inside or outside?   -->
 
         </aside>
-    </main>
+    </div>
     <div th:replace="base :: footer "></div>
 </div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -145,10 +154,12 @@
 <!--<script src="js/ourjs.js"></script>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+
 <script type="text/javascript">
 
     // save orders on backend with AJAX
     // to Express?
+    // resetInputs();
 
     let PIZZA = document.querySelector(".pizza");
     let SAUCE = document.querySelector(".sauce");
@@ -177,21 +188,53 @@
     menuForm.addEventListener("change", (e) => {
         e.preventDefault();
         if (cau.checked == true) {
-            console.log("cauliflower");
+            // console.log("cauliflower");
 
             toppings = toppings + " ,cauliflower";
 
             PIZZA.style.backgroundColor = "cornsilk";
-        } else if (who.checked == true) {
+            console.log(toppings);
+        } else {
+            if ((toppings != null) && (toppings.includes(" ,cauliflower"))) {
+                // if (toppings.includes(" ,cauliflower")) {
+                toppings = toppings.replace(" ,cauliflower", "");
+            }
+
+            console.log(toppings);
+        }
+
+        if (who.checked == true) {
             console.log("whole wheat");
             toppings = toppings + " ,whole wheat";
+
             PIZZA.style.backgroundColor = "darkgoldenrod";
-        } else if (tra.checked == true) {
+            console.log(toppings);
+        } else {
+            if ((toppings != null) && (toppings.includes(" ,whole wheat"))) {
+                toppings = toppings.replace(" ,whole wheat", "");
+            }
+        }
+
+        if (tra.checked == true) {
             console.log("traditional");
             toppings = toppings + " ,traditional";
+
             PIZZA.style.backgroundColor = "wheat";
+            console.log(toppings);
+        } else {
+            if ((toppings != null) && (toppings.includes(" ,traditional"))) {
+                toppings = toppings.replace(" ,traditional", "");
+            }
         }
-    });
+    })
+    ;
+
+    // let res = toppings.split(",");
+    // let last = res[res.length - 1];
+    // toppings = null + " ," + last;
+    // console.log(toppings);
+
+
 
     let menuForm2 = document.querySelector("#form2");
     menuForm2.addEventListener("change", (e) => {
@@ -205,21 +248,35 @@
         } else if (cau.checked == true || who.checked == true || tra.checked == true) {
             if (cur.checked == true) {
                 console.log("curry");
-                toppings = toppings + " ,curry";
+                toppings = toppings + ", curry";
                 SAUCE.style.visibility = "visible";
                 SAUCE.style.backgroundColor = "orange";
+            } else {
+                if (toppings.includes(", curry")) {
+                    toppings = toppings.replace(", curry", "");
+                }
             }
+
             if (cre.checked == true) {
                 console.log("cream");
-                toppings = toppings + " , cream";
+                toppings = toppings + ", cream";
                 SAUCE.style.visibility = "visible";
                 SAUCE.style.backgroundColor = "oldlace";
+            } else {
+                if (toppings.includes(", cream")) {
+                    toppings = toppings.replace(", cream", "");
+                }
             }
+
             if (mar.checked == true) {
                 console.log("marinara");
-                toppings = toppings + " ,marinara";
+                toppings = toppings + ", marinara";
                 SAUCE.style.visibility = "visible";
                 SAUCE.style.backgroundColor = "tomato";
+            } else {
+                if (toppings.includes(", marinara")) {
+                    toppings = toppings.replace(", marinara", "");
+                }
             }
         }
     });
@@ -234,22 +291,39 @@
             moz.checked = false;
             ame.checked = false;
             pro.checked = false;
-        } else if (cur.checked == true || cre.checked == true || mar.checked == true) {
+        // } else if (cur.checked == true || cre.checked == true || mar.checked == true) {
+        } else if (cau.checked == true || who.checked == true || tra.checked == true) {
             if (moz.checked == true) {
                 console.log("mozza");
-                toppings = toppings + " ,mozzarella";
+                toppings = toppings + ", mozzarella";
                 CHEESE.style.visibility = "visible";
                 CHEESE.style.backgroundColor = "lightyellow";
-            } else if (ame.checked == true) {
+            } else {
+                if (toppings.includes(", mozzarella")) {
+                    toppings = toppings.replace(", mozzarella", "");
+                }
+            }
+
+            if (ame.checked == true) {
                 console.log("american");
-                toppings = toppings + " ,american";
+                toppings = toppings + ", american";
                 CHEESE.style.visibility = "visible";
                 CHEESE.style.backgroundColor = "yellow";
-            } else if (pro.checked == true) {
+            } else {
+                if (toppings.includes(", american")) {
+                    toppings = toppings.replace(", american", "");
+                }
+            }
+
+            if (pro.checked == true) {
                 console.log("provolone");
-                toppings = toppings + " ,provolone";
+                toppings = toppings + ", provolone";
                 CHEESE.style.visibility = "visible";
                 CHEESE.style.backgroundColor = "bisque";
+            } else {
+                if (toppings.includes(", provolone")) {
+                    toppings = toppings.replace(", provolone", "");
+                }
             }
         }
     });
@@ -279,6 +353,8 @@
             && moz.checked == false && ame.checked == false && pro.checked == false) {
             console.log("test");
             alert("Dough, sauce, cheese, and then toppings.");
+            toppings = null;
+
             spi.checked = false;
             top1.style.visibility = "hidden";
             tom.checked = false;
@@ -287,6 +363,8 @@
             top3.style.visibility = "hidden";
             mus.checked = false;
             top4.style.visibility = "hidden";
+
+            // return;
         }
         priceChanger();
     });
@@ -294,11 +372,14 @@
     spi.addEventListener("change", (e) => {
         if (spi.checked == true) {
             console.log("spinach");
-            toppings = toppings + " ,spinach";
+            toppings = toppings + ", spinach";
             top1.style.visibility = "visible";
             top1.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/spinach.png";
             // priceChanger();
         } else {
+            if (toppings.includes(", spinach")) {
+                toppings = toppings.replace(", spinach", "");
+            }
             console.log("no spinach");
             top1.style.visibility = "hidden";
         }
@@ -307,11 +388,14 @@
     tom.addEventListener("change", (e) => {
         if (tom.checked == true) {
             console.log("tomatoes");
-            toppings = toppings + " ,tomatoes";
+            toppings = toppings + ", tomatoes";
             top2.style.visibility = "visible";
             top2.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/tomatoes.png";
             // priceChanger();
         } else {
+            if (toppings.includes(", tomatoes")) {
+                toppings = toppings.replace(", tomatoes", "");
+            }
             console.log("no tomatoes");
             top2.style.visibility = "hidden";
         }
@@ -320,11 +404,14 @@
     bac.addEventListener("change", (e) => {
         if (bac.checked == true) {
             console.log("bacon");
-            toppings = toppings + " ,bacon";
+            toppings = toppings + ", bacon";
             top3.style.visibility = "visible";
             top3.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/bacon.png";
             // priceChanger();
         } else {
+            if (toppings.includes(", bacon")) {
+                toppings = toppings.replace(", bacon", "");
+            }
             console.log("no bacon");
             top3.style.visibility = "hidden";
         }
@@ -333,11 +420,14 @@
     mus.addEventListener("change", (e) => {
         if (mus.checked == true) {
             console.log("mushrooms");
-            toppings = toppings + " ,mushrooms";
+            toppings = toppings + ", mushrooms";
             top4.style.visibility = "visible";
             top4.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/mushroom.png";
             // priceChanger();
         } else {
+            if (toppings.includes(", mushrooms")) {
+                toppings = toppings.replace(", mushrooms", "");
+            }
             console.log("no mushrooms");
             top4.style.visibility = "hidden";
         }
@@ -352,18 +442,25 @@
 
     pf.addEventListener("submit", (e) => {
         e.preventDefault();
-        console.log("form test");
+        console.log(toppings);
         // toggle to visible
         // alert: if checkboxes checked < 2
         // document.getElementsByTagName("FORM").style.display = "none";
-
-        if (document.querySelectorAll('input[type="checkbox"]:checked').length < 2) {
-            alert("Two toppings are included with your pizza. Please add one.");
-            resetInputs();
-        } else {
-
-            receipt.style.visibility = "visible";
+        if (cur.checked == false && cre.checked == false && mar.checked == false) {
+            alert("Please choose a sauce.");
+            return;
         }
+        if (moz.checked == false && ame.checked == false && pro.checked == false) {
+            alert("Please choose a cheese.");
+            return;
+        }
+        if (document.querySelectorAll('input[type="checkbox"]:checked').length < 2) {
+            alert("At least two toppings are included with your pizza. Please add one or more toppings.");
+            // resetInputs();
+            return;
+        }
+        receipt.style.visibility = "visible";
+
 
         // let selected = new Array();
         let chks = document.getElementsByTagName("INPUT");
@@ -376,13 +473,13 @@
         // add nulls...
         if (selected.length == 6) {
             // add one null
-            selected.push("")
+            selected.push("");
         } else if (selected.length == 5) {
             // add two nulls
             selected.push("", "");
         } else if (selected.length == 4) {
             // add three nulls
-            selected.push("", "", "")
+            selected.push("", "", "");
         }
 
         // I need to create null values so price can work above
@@ -399,7 +496,7 @@
             console.log(idElement.value);
 
         } else {
-            sub();
+            submit();
             console.log(idElement.value);
 
         }
@@ -411,9 +508,11 @@
                 data: {
                     toppings: toppings,
                 },
+
                 success: function (result) {
-                    console.log(result);
+                    // console.log(result);
                     // window.location.href = "/";
+
                 },
                 error: function (result) {
                     window.location.href = "/login";
@@ -421,7 +520,7 @@
             });
         }
 
-        function sub() {
+        function submit() {
             $.ajax({
                 type: "POST",
                 url: "/addPizza",
@@ -429,10 +528,11 @@
                     toppings: toppings,
                 },
                 success: function (result) {
-                    console.log(result);
+                    // console.log(result);
                     // window.location.href = "/";
                 },
-                error: function (result) {
+                error: function(result) {
+                    console.log(result);
                     window.location.href = "/login";
                 }
             });
@@ -487,8 +587,9 @@
         ame.checked = false;
         pro.checked = false;
 
-        pd.innerHTML = "$5.00";
+        pd.innerHTML = "Price: $5.00";
         receipt.style.visibility = "hidden";
+        toppings = null;
 
     }
 
@@ -526,19 +627,32 @@
     //     });
     // }
 
-
 </script>
-<style>
-    .flex-wrapper {
-        display: flex;
-        min-height: 150vh;
-        flex-direction: column;
-        justify-content: space-between;
-    }
 
-    /*body {*/
-    /*    max-height: 900px;*/
-    /*}*/
-</style>
+<div sec:authorize="isAnonymous()">
+    <script>
+        window.onload = function() {
+            alert('You must be logged in to save your order. No account yet? Please register.');
+        }
+    </script>
+</div>
+
+<!--</div>-->
+
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        /* vp_h will hold the height of the browser window */-->
+<!--        var vp_h = $(window).height();-->
+<!--        /* b_g will hold the height of the html body */-->
+<!--        var b_g = $('body').height();-->
+<!--        /* If the body height is lower than window */-->
+<!--        if (b_g < vp_h) {-->
+<!--            /* Set the footer css -> position: absolute; */-->
+<!--            $('.footer').css("position", "absolute");-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+
 </body>
 </html>

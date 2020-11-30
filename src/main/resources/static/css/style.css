@@ -415,7 +415,7 @@ mark,
   margin: 0 auto; }
 
 .img-thumbnail2 {
-  padding: 0.25rem;
+  /*padding: 0.25rem;*/
   width: 30px;
   max-height: 20%;
   margin: -10px; }
@@ -7354,7 +7354,8 @@ h1, h2, h3, h4, h5,
         padding-bottom: 1.5rem;
         padding-left: 20px;
         padding-right: 20px;
-        color: rgba(255, 255, 255, 0.7); } }
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 18px; } }
     .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
       color: #fac564; }
   .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu {
@@ -7496,14 +7497,16 @@ h1, h2, h3, h4, h5,
     color: #fac564; }
   .navbar-brand small {
     /*text-transform: uppercase;*/
-    font-size: 16px;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 20px;
     /*display: block;*/
     text-align: center;
     color: #fac564;
     letter-spacing: 2px; }
   .navbar-brand small1 {
     /*text-transform: uppercase;*/
-    font-size: 30px;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 36px;
     display: block;
     text-align: center;
     color: #fa8c30;
@@ -7511,7 +7514,7 @@ h1, h2, h3, h4, h5,
     margin-bottom: 10px; }
 
 
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+/*@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {*/
   /* IE10+ CSS styles go here */
   /*.navbar-brand small1 {*/
     /*text-transform: uppercase;*/
@@ -7521,7 +7524,7 @@ h1, h2, h3, h4, h5,
     /*color: #fa8c30;*/
     /*letter-spacing: 4px;*/
     /*margin-bottom: -930px; }*/
-}
+/*}*/
 
 .owl-carousel {
   position: relative; }
