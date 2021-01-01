@@ -351,7 +351,6 @@
         if (cau.checked == false && who.checked == false && tra.checked == false
             && cur.checked == false && cre.checked == false && mar.checked == false
             && moz.checked == false && ame.checked == false && pro.checked == false) {
-            console.log("test");
             alert("Dough, sauce, cheese, and then toppings.");
             toppings = null;
 
@@ -371,39 +370,32 @@
 
     spi.addEventListener("change", (e) => {
         if (spi.checked == true) {
-            console.log("spinach");
             toppings = toppings + ", spinach";
             top1.style.visibility = "visible";
             top1.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/spinach.png";
-            // priceChanger();
         } else {
             if (toppings.includes(", spinach")) {
                 toppings = toppings.replace(", spinach", "");
             }
-            console.log("no spinach");
             top1.style.visibility = "hidden";
         }
     });
 
     tom.addEventListener("change", (e) => {
         if (tom.checked == true) {
-            console.log("tomatoes");
             toppings = toppings + ", tomatoes";
             top2.style.visibility = "visible";
             top2.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/tomatoes.png";
-            // priceChanger();
         } else {
             if (toppings.includes(", tomatoes")) {
                 toppings = toppings.replace(", tomatoes", "");
             }
-            console.log("no tomatoes");
             top2.style.visibility = "hidden";
         }
     });
 
     bac.addEventListener("change", (e) => {
         if (bac.checked == true) {
-            console.log("bacon");
             toppings = toppings + ", bacon";
             top3.style.visibility = "visible";
             top3.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/bacon.png";
@@ -412,23 +404,19 @@
             if (toppings.includes(", bacon")) {
                 toppings = toppings.replace(", bacon", "");
             }
-            console.log("no bacon");
             top3.style.visibility = "hidden";
         }
     });
 
     mus.addEventListener("change", (e) => {
         if (mus.checked == true) {
-            console.log("mushrooms");
             toppings = toppings + ", mushrooms";
             top4.style.visibility = "visible";
             top4.src = "https://res.cloudinary.com/a-name-not-already-taken/image/upload/v1583622483/mushroom.png";
-            // priceChanger();
         } else {
             if (toppings.includes(", mushrooms")) {
                 toppings = toppings.replace(", mushrooms", "");
             }
-            console.log("no mushrooms");
             top4.style.visibility = "hidden";
         }
     });
@@ -436,16 +424,16 @@
 
     let selected = new Array();  // Global Array, pass downwards
 
-
-    // how do you hide... the
-
-
     pf.addEventListener("submit", (e) => {
         e.preventDefault();
-        console.log(toppings);
         // toggle to visible
         // alert: if checkboxes checked < 2
         // document.getElementsByTagName("FORM").style.display = "none";
+
+        if (cau.checked == false && who.checked == false && tra.checked == false) {
+            alert("Dough, sauce, cheese, and then toppings.");
+            return;
+        }
         if (cur.checked == false && cre.checked == false && mar.checked == false) {
             alert("Please choose a sauce.");
             return;
@@ -488,17 +476,12 @@
         selected.push(pd.innerHTML);
         selected.map(a => console.log(a.toString()));
         // const selected = "pizza test";
-        console.log(selected);
         // sub();
 
         if (idElement.value != 0) {
             update();
-            console.log(idElement.value);
-
         } else {
             submit();
-            console.log(idElement.value);
-
         }
 
         function update() {
@@ -532,7 +515,6 @@
                     // window.location.href = "/";
                 },
                 error: function(result) {
-                    console.log(result);
                     window.location.href = "/login";
                 }
             });
@@ -600,33 +582,6 @@
         resetInputs();
     });
 
-
-    // AJAX ADDED BELOW //
-
-
-    // let selected = `${cau.value}, ${who.value}, ${tra.value}, ${cur.value}, ${cre.value}, ${mar.value}, ${moz.value}, ${ame.value}, ${pro.value}`;
-    // THIS WORKS FOR NUMBER let selected = document.querySelectorAll('input:checked').length;
-    // let selected = document.querySelectorAll('input:checked').value;
-
-    //Below: For non-Codepen
-
-    // function sub() {
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "/addPizza",
-    //         data: {
-    //             toppings: toppings,
-    //         },
-    //         success: function (result) {
-    //             console.log(result);
-    //             // window.location.href = "/";
-    //         },
-    //         error: function(result) {
-    //             window.location.href = "/login";
-    //         }
-    //     });
-    // }
-
 </script>
 
 <div sec:authorize="isAnonymous()">
@@ -636,23 +591,6 @@
         }
     </script>
 </div>
-
-<!--</div>-->
-
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        /* vp_h will hold the height of the browser window */-->
-<!--        var vp_h = $(window).height();-->
-<!--        /* b_g will hold the height of the html body */-->
-<!--        var b_g = $('body').height();-->
-<!--        /* If the body height is lower than window */-->
-<!--        if (b_g < vp_h) {-->
-<!--            /* Set the footer css -> position: absolute; */-->
-<!--            $('.footer').css("position", "absolute");-->
-<!--        }-->
-<!--    });-->
-<!--</script>-->
-
 
 </body>
 </html>
